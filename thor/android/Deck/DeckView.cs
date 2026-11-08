@@ -45,7 +45,7 @@ public class DeckView : View
 
 	readonly Java.Lang.IRunnable checkLong;
 	readonly Dictionary<string, Bitmap> icons = new();
-	readonly Paint iconPaint = new(PaintFlags.FilterBitmap);
+	readonly Paint iconPaint = new();
 
 	public DeckView(Context ctx) : base(ctx)
 	{
@@ -347,6 +347,7 @@ public class DeckView : View
 				s = s >= 1 ? (float)Math.Floor(s) : s;
 				float w = bmp.Width * s, h = bmp.Height * s;
 				iconPaint.Alpha = dim ? 90 : 255;
+				iconPaint.FilterBitmap = s < 1; // integer upscale stays pixel-sharp
 				c.DrawBitmap(bmp, null, new RectF(iconBox.CenterX() - w / 2, iconBox.CenterY() - h / 2, iconBox.CenterX() + w / 2, iconBox.CenterY() + h / 2), iconPaint);
 			}
 

@@ -18,10 +18,12 @@ public class MobdImage
 	public readonly int Width;
 	public readonly int Height;
 	public readonly byte[] Pixels;
+	public readonly uint Flags;
 
 	public MobdImage(Stream stream, uint flags, GameFormat gameFormat)
 	{
 		bool flipped;
+		this.Flags = flags;
 		this.Width = stream.ReadInt32();
 		this.Height = stream.ReadInt32();
 		this.Pixels = new byte[this.Width * this.Height];

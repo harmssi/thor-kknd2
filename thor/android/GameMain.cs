@@ -43,6 +43,7 @@ public static class GameMain
 				"Graphics.GLProfile=Embedded",
 				"Graphics.Mode=Fullscreen",
 				"Graphics.UIScale=1.5",
+				"Graphics.ViewportDistance=Close", // world at an integer 2x zoom (960x540 view); "Medium" gave 1.5x = uneven pixels
 				"Graphics.DisableHardwareCursors=True", // Android shows no SDL cursor without a mouse; the stick needs a visible one // 6" 1080p screen: OpenRA's UI at 1280x720 logical
 				// offline handheld: no telemetry, news or version checks; touch/stick instead of edge scrolling
 				"Debug.SendSystemInformation=False",

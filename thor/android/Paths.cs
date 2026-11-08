@@ -22,6 +22,6 @@ public static class Paths
 
 	public static string Content(Context ctx) => Path.Combine(Support(ctx), "Content", "openkrush_gen2");
 	public static string ImportedMaps(Context ctx) => Path.Combine(Support(ctx), "maps", "openkrush_gen2", "imported");
-	public static bool HasContent(Context ctx) => File.Exists(Path.Combine(Content(ctx), "levels", "sprite.lpk"))
-		&& Directory.Exists(ImportedMaps(ctx)) && Directory.GetDirectories(ImportedMaps(ctx)).Length > 0;
+	// maps are (re)built from the imported levels by GameMain when missing or outdated
+	public static bool HasContent(Context ctx) => File.Exists(Path.Combine(Content(ctx), "levels", "sprite.lpk"));
 }

@@ -23,7 +23,7 @@ using OpenRA.FileFormats;
 /// </summary>
 public static class Gen2MapImporter
 {
-	public const int Version = 2;
+	public const int Version = 3;
 
 	// CPLC placement types (verified on mlti_01: 8 = player start with 0xAAAA000n, 16 = oil patch)
 	private const int PlacementStart = 8;
@@ -120,30 +120,63 @@ public static class Gen2MapImporter
 		y2.Append($"\nRules:\n\tWorld:\n\t\tMapdTerrain:\n\t\t\tLevel: {levelPath}\n");
 		File.WriteAllText(Path.Combine(mapDir, "map.yaml"), y2.ToString());
 
-		WritePreview(Path.ChangeExtension(levelFile, ".mim"), Path.Combine(mapDir, "map.png"));
+		WritePreview(level, Path.Combine(mapDir, "map.png"));
 	}
 
-	/// <summary>.mim = minimap: -1, width, height, then width*height RGB555.</summary>
-	private static void WritePreview(string mim, string png)
+	/// <summary>
+	/// OpenRA's map preview (lobby, map chooser) expects exactly one pixel per cell of the map bounds; spawn markers are placed
+	/// with that assumption. Each pixel is the average colour of the cell's ground tile (both MAPD layers).
+	/// </summary>
+	private static void WritePreview(Gen2Level level, string png)
 	{
-		if (!File.Exists(mim))
-			return;
+		var ground = level.Layers[0];
+		int w = ground.TilesX, h = ground.TilesY, bw = w - 2, bh = h - 2;
+		var overlay = level.Layers.Length > 1 && level.Layers[1].TilesX == w && level.Layers[1].TilesY == h ? level.Layers[1] : null;
+		var rgba = new byte[bw * bh * 4];
+		var cache = new Dictionary<int, (int R, int G, int B)>();
 
-		var d = File.ReadAllBytes(mim);
-		int w = BitConverter.ToInt32(d, 4), h = BitConverter.ToInt32(d, 8);
-		if (w <= 0 || h <= 0 || 12 + w * h * 2 > d.Length)
-			return;
-
-		var rgba = new byte[w * h * 4];
-		for (var i = 0; i < w * h; i++)
+		(int R, int G, int B) Average(Gen2Level.Layer layer, int tile, bool transparentZero)
 		{
-			var c = BitConverter.ToUInt16(d, 12 + i * 2);
-			rgba[i * 4] = (byte)((c & 0x7c00) >> 7);
-			rgba[i * 4 + 1] = (byte)((c & 0x03e0) >> 2);
-			rgba[i * 4 + 2] = (byte)((c & 0x001f) << 3);
-			rgba[i * 4 + 3] = 255;
+			var px = level.TilePixels(layer, tile, transparentZero);
+			long r = 0, g = 0, b = 0, n = 0;
+			for (var i = 0; i < px.Length; i += 4)
+			{
+				if (px[i + 3] == 0)
+					continue;
+				r += px[i];
+				g += px[i + 1];
+				b += px[i + 2];
+				n++;
+			}
+
+			return n == 0 ? (-1, 0, 0) : ((int)(r / n), (int)(g / n), (int)(b / n));
 		}
 
-		new Png(rgba, SpriteFrameType.Rgba32, w, h).Save(png);
+		for (var y = 0; y < bh; y++)
+		for (var x = 0; x < bw; x++)
+		{
+			var c = (R: 0, G: 0, B: 0);
+			var t = ground.Tiles[(y + 1) * w + x + 1];
+			if (t != 0)
+			{
+				if (!cache.TryGetValue(t, out c))
+					cache[t] = c = Average(ground, t, false);
+			}
+
+			if (overlay != null && overlay.Tiles[(y + 1) * w + x + 1] is var o && o != 0)
+			{
+				var oc = Average(overlay, o, true);
+				if (oc.R >= 0)
+					c = ((c.R + oc.R * 2) / 3, (c.G + oc.G * 2) / 3, (c.B + oc.B * 2) / 3);
+			}
+
+			var k = (y * bw + x) * 4;
+			rgba[k] = (byte)Math.Max(0, c.R);
+			rgba[k + 1] = (byte)c.G;
+			rgba[k + 2] = (byte)c.B;
+			rgba[k + 3] = 255;
+		}
+
+		new Png(rgba, SpriteFrameType.Rgba32, bw, bh).Save(png);
 	}
 }

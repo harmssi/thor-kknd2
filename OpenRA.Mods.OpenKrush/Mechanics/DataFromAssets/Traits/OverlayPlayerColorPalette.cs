@@ -34,6 +34,9 @@ public class OverlayPlayerColorPaletteInfo : TraitInfo
 	[Desc("Remap these indices to player colors.")]
 	public readonly int[] RemapIndex = Array.Empty<int>();
 
+	[Desc("Remap every blue palette entry (KKND2 sprites mark the player colour in blue) instead of a fixed RemapIndex list.")]
+	public readonly bool AutoRemapBlue;
+
 	[Desc("Allow palette modifiers to change the palette.")]
 	public readonly bool AllowModifiers = true;
 
@@ -56,7 +59,8 @@ public class OverlayPlayerColorPalette : ILoadsPlayerPalettes
 	{
 		var pal = new MutablePalette(wr.Palette(this.info.BasePalette).Palette);
 
-		foreach (var i in this.info.RemapIndex)
+		var indices = this.info.AutoRemapBlue ? BlueIndices(pal) : this.info.RemapIndex;
+		foreach (var i in indices)
 		{
 			var bw = (((pal[i] & 0xff) + ((pal[i] >> 8) & 0xff) + ((pal[i] >> 16) & 0xff)) / 3) / 255f;
 			float Mix(byte c) => bw > .5f ? 1 - (1 - 2 * (bw - .5f)) * (1 - c / 255f) : 2 * bw * (c / 255f);
@@ -66,5 +70,26 @@ public class OverlayPlayerColorPalette : ILoadsPlayerPalettes
 		}
 
 		wr.AddPalette(this.info.BaseName + playerName, new ImmutablePalette(pal), this.info.AllowModifiers, replaceExisting);
+	}
+
+	private static int[] BlueIndices(MutablePalette pal)
+	{
+		var list = new List<int>();
+		for (var i = 1; i < Palette.Size; i++)
+		{
+			var c = pal[i];
+			float r = (c >> 16) & 0xff, g = (c >> 8) & 0xff, b = c & 0xff;
+			var max = Math.Max(r, Math.Max(g, b));
+			var min = Math.Min(r, Math.Min(g, b));
+			if (max < 24 || max - min < 0.2f * max || b != max)
+				continue;
+
+			// hue 190..260 degrees: blue
+			var hue = 60 * (4 + (r - g) / (max - min));
+			if (hue >= 190 && hue <= 260)
+				list.Add(i);
+		}
+
+		return list.ToArray();
 	}
 }

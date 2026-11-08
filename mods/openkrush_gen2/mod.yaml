@@ -1,6 +1,6 @@
 Metadata:
 	Title: KKND2 Thor
-	Version: 0.1.0
+	Version: 0.1.1
 	Website: https://github.com/IceReaper/OpenKrush/
 	WindowTitle: KKND2 Thor
 
@@ -60,6 +60,7 @@ Rules:
 	openkrush_gen2|rules/series9-towers.yaml
 	openkrush_gen2|rules/series9-walls.yaml
 	openkrush_gen2|rules/ai.yaml
+	openkrush_gen2|rules/building-palettes.yaml
 
 Sequences:
 	openkrush|actors/mpspawn/sequences.yaml
