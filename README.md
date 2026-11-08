@@ -52,7 +52,7 @@ Screenshots: AYN Thor, rendered from the author's own Steam copy.
 
 Saves: `Android/data/de.harmssi.thorkknd2/files/support/Saves`.
 
-## Known limits (v0.1.0)
+## Known limits (v0.1.1)
 
 - **No campaigns** yet (17 missions per faction need their own mission scripts). Skirmish only.
 - No aircraft; balance follows OpenKrush's unfinished 2020 KKND2 rules, not tuned against the original.
@@ -111,7 +111,7 @@ normalen Ordner. APK aus dem [Release](../../releases/latest) installieren, **St
 `KKND 2 Krossfire` auswählen. Dann Einzelspieler → Gefecht, Computer-Gegner hinzufügen, starten und unten
 **Aufbauen** tippen.
 
-**Grenzen von v0.1.0:** keine Kampagnen, keine Flugzeuge, Werte nicht ans Original angeglichen, nur
+**Grenzen von v0.1.1:** keine Kampagnen, keine Flugzeuge, Werte nicht ans Original angeglichen, nur
 englischer Tonsatz, Netzwerkspiel ungetestet.
 
 Dank an OpenRA, IceReaper/OpenKrush und Dzierzan. Lizenz: GNU GPL v3. Inoffiziell, nicht mit den
