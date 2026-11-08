@@ -13,6 +13,7 @@
 
 namespace OpenRA.Mods.OpenKrush.Widgets;
 
+using Assets.FileFormats;
 using Common.Traits;
 using GameRules;
 using JetBrains.Annotations;
@@ -117,7 +118,28 @@ public class IntroLogic : ChromeLogic
 			return;
 		}
 
-		this.player.Video = new(stream);
+		try
+		{
+			var vbc = new Vbc(stream);
+			if (!vbc.HasAudio)
+				foreach (var lang in new[] { "en", "de", "fr" })
+					if (fmvPackage!.GetStream($"{lang}/{video}") is { } audioStream)
+					{
+						vbc.UseAudioFrom(new Vbc(audioStream));
+						break;
+					}
+
+			this.player.Video = vbc;
+		}
+		catch (Exception e)
+		{
+			// e.g. the Steam re-release's VBC variant: skip the video instead of crashing
+			Log.Write("debug", $"Skipping {video}: {e.Message}");
+			IntroLogic.state++;
+
+			return;
+		}
+
 		this.player.Play(() => IntroLogic.state++);
 	}
 

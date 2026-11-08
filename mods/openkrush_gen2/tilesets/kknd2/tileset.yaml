@@ -1,0 +1,71 @@
+# Terrain *types* only. The visible ground of a KKND2 map is drawn from the owner's original level file
+# (MapdTerrain); map.bin stores one of these templates per cell, generated from the level's attribute layer.
+General:
+	Name: KKND2
+	Id: kknd2
+	SheetSize: 512
+
+Terrain:
+	TerrainType@Clear: # required by the engine, not used by imported maps
+		Type: Clear
+		TargetTypes: Ground
+		Color: 6E5A3C
+	TerrainType@Dirt:
+		Type: Dirt
+		TargetTypes: Ground
+		Color: 6E5A3C
+		AcceptsSmudgeType: Crater
+	TerrainType@Street:
+		Type: Street
+		TargetTypes: Ground
+		Color: 5A5046
+		AcceptsSmudgeType: Crater
+	TerrainType@Rough:
+		Type: Rough
+		TargetTypes: Ground
+		Color: 504632
+	TerrainType@Water:
+		Type: Water
+		TargetTypes: Ground
+		Color: 32465A
+	TerrainType@Cliff:
+		Type: Cliff
+		TargetTypes: Ground
+		Color: 281E14
+
+Templates:
+	Template@0:
+		Id: 0
+		Images: tilesets/kknd2/dirt.png
+		Size: 1,1
+		Categories: Terrain
+		Tiles:
+			0: Dirt
+	Template@1:
+		Id: 1
+		Images: tilesets/kknd2/street.png
+		Size: 1,1
+		Categories: Terrain
+		Tiles:
+			0: Street
+	Template@2:
+		Id: 2
+		Images: tilesets/kknd2/rough.png
+		Size: 1,1
+		Categories: Terrain
+		Tiles:
+			0: Rough
+	Template@3:
+		Id: 3
+		Images: tilesets/kknd2/water.png
+		Size: 1,1
+		Categories: Terrain
+		Tiles:
+			0: Water
+	Template@4:
+		Id: 4
+		Images: tilesets/kknd2/cliff.png
+		Size: 1,1
+		Categories: Terrain
+		Tiles:
+			0: Cliff

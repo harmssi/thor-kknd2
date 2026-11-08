@@ -1,0 +1,7 @@
+Metrics:
+	ClickSound: ClickSound
+	ClickDisabledSound: ClickSound
+	ChatLineSound: ChatLine
+	ButtonArea-survivors: 4, 4, 40, 40
+	ButtonArea-evolved: 4, 4, 40, 40
+	ButtonArea-series9: 4, 4, 40, 40

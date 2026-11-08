@@ -1,0 +1,5 @@
+oilpatch:
+	Building:
+		TerrainTypes: Dirt, Street
+	RenderSprites:
+		Palette: B_Oil

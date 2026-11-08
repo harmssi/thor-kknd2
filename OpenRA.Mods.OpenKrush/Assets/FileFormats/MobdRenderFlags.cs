@@ -43,7 +43,7 @@ public class MobdRenderFlags
 			var numColors = stream.ReadUInt16();
 			this.Palette = new uint[256];
 
-			for (var i = 0; i < numColors; i++)
+			for (var i = 0; i < Math.Min((int)numColors, 256); i++)
 			{
 				var color16 = stream.ReadUInt16();
 				var r = ((color16 & 0x7c00) >> 7) & 0xff;

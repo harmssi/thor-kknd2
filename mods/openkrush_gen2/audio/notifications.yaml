@@ -1,0 +1,28 @@
+# Announcer + UI sounds from the owner's levels/sound_en.spk (names: archives/sound_en.spk.yaml).
+Sounds:
+	DefaultVariant: .soun
+	Notifications:
+		Beacon: ui_click
+		ChatLine: ui_click
+		ClickSound: ui_click
+
+Speech:
+	DefaultVariant: .soun
+	Prefixes:
+		survivors: survivors_
+		evolved: evolved_
+		series9: series9_
+	Notifications:
+		BuildingReady: BuildingReady
+		ResearchStarted: ResearchStarted
+		ResearchCompleted: ResearchCompleted
+		ResearchCanceled: ResearchCanceled
+		BuildingLost: BuildingLost
+		BuildingUnderAttack: BuildingUnderAttack
+		UnitUnderAttack: UnitUnderAttack1, UnitUnderAttack2
+		UnitUnderAttackVeteran: UnitUnderAttackVeteran
+		TankerUnderAttack: UnitUnderAttack1
+		DrillRigUnderAttack: DrillRigUnderAttack
+		BunkerUnderAttack: BuildingUnderAttack
+		DrillrigLow: DrillrigLow
+		DrillrigEmpty: DrillrigEmpty

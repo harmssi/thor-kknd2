@@ -1,0 +1,78 @@
+World:
+	Faction@Evolved:
+		Name: Evolved
+		InternalName: evolved
+	StartingUnits@evolved0:
+		Class: light
+		ClassName: Mobile Base, Derrick and Infantry
+		BaseActor: evolved_mobileclanhall
+		SupportActors: evolved_mobilederrick, evolved_berzerker, evolved_berzerker, evolved_berzerker, evolved_berzerker
+		Factions: evolved
+		InnerSupportRadius: 4
+		OuterSupportRadius: 6
+	StartingUnits@evolved1:
+		Class: support
+		ClassName: Mobile Base and Derrick
+		BaseActor: evolved_mobileclanhall
+		SupportActors: evolved_mobilederrick
+		Factions: evolved
+		InnerSupportRadius: 4
+		OuterSupportRadius: 6
+	StartingUnits@evolved2:
+		Class: none
+		ClassName: Mobile Base Only
+		BaseActor: evolved_mobileclanhall
+		Factions: evolved
+
+
+^EvolvedBuilding:
+	Inherits: ^CoreBuilding
+	TechLevelBuildable:
+		Prerequisites: evolved_clanhall
+	ProvidesPrerequisite@Generic:
+		Prerequisite: evolved_building
+		RequiresCondition: !selfconstructing && !deconstructing
+	Researchable:
+		RequiresCondition: !selfconstructing && !deconstructing
+	RenderSprites:
+		PlayerPalette: E_Spriteb_player
+
+^EvolvedWall:
+	Inherits: ^CoreWall
+	TechLevelBuildable:
+		Prerequisites: evolved_clanhall
+
+^EvolvedTower:
+	Inherits@1: ^CoreTower
+	Inherits@2: ^CoreTurret
+	TechLevelBuildable:
+		Prerequisites: evolved_forge
+
+^EvolvedInfantry:
+	Inherits: ^CoreInfantry
+	TechLevelBuildable:
+		Prerequisites: evolved_warriorhall
+	VeterancyVoiced:
+		VoiceSets: EvolvedVoice, EvolvedVeteranVoice, EvolvedVeteranVoice
+	WithDeathAnimation:
+		DeathSequencePalette: M_I_Gunner_player # same for all infantry
+
+^EvolvedVehicle:
+	Inherits: ^CoreVehicle
+	TechLevelBuildable:
+		Prerequisites: evolved_beastenclosure
+	VeterancyVoiced:
+		VoiceSets: EvolvedVoice, EvolvedVeteranVoice, EvolvedVeteranVoice
+
+^EvolvedBeast:
+	Inherits: ^CoreVehicle
+	TechLevelBuildable:
+		Queue: beast
+		Prerequisites: evolved_beastenclosure
+
+^EvolvedAircraft:
+	Inherits: ^CoreAircraft
+	TechLevelBuildable:
+		Queue: aircraft
+		Prerequisites: evolved_beastenclosure
+

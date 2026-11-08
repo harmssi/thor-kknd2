@@ -1,0 +1,131 @@
+Cursors:
+	sprites|B_Cursors.mobd: B_Cursors
+		default:
+			Start: 0
+		generic-blocked:
+			Start: 118
+		select:
+			Start: 4
+			Length: 10
+		move:
+			Start: 106
+			Length: 6
+		move-blocked:
+			Start: 118
+		attack:
+			Start: 84
+			Length: 11
+		attackoutsiderange:
+			Start: 95
+			Length: 11
+		assaultmove:
+			Start: 95
+			Length: 11
+		assaultmove-blocked:
+			Start: 95
+			Length: 11
+		attackmove:
+			Start: 112
+			Length: 6
+		attackmove-blocked:
+			Start: 112
+			Length: 6
+		repair:
+			Start: 14
+			Length: 8
+		repair-blocked:
+			Start: 83
+		research:
+			Start: 28
+			Length: 13
+		research-blocked:
+			Start: 74
+			Length: 9
+		enter:
+			Start: 41
+			Length: 5
+		enter-blocked:
+			Start: 46
+			Length: 5
+		conquer:
+			Start: 41
+			Length: 5
+		conquer-blocked:
+			Start: 46
+			Length: 5
+		exit:
+			Start: 57
+			Length: 6
+		exit-blocked:
+			Start: 118
+		deploy:
+			Start: 22
+			Length: 6
+		deploy-blocked:
+			Start: 118
+		dock:
+			Start: 135
+			Length: 6
+		sell:
+			Start: 63
+			Length: 6
+		sell-blocked:
+			Start: 118
+		no-oil:
+			Start: 118
+		ability:
+			Start: 22
+			Length: 6
+		joystick-all:
+			Start: 69
+		defend:
+			Start: 70
+			Length: 4
+		scroll-t:
+			Start: 0
+		scroll-r:
+			Start: 0
+		scroll-b:
+			Start: 0
+		scroll-l:
+			Start: 0
+		scroll-tr:
+			Start: 0
+		scroll-br:
+			Start: 0
+		scroll-bl:
+			Start: 0
+		scroll-tl:
+			Start: 0
+		scroll-t-blocked:
+			Start: 0
+		scroll-r-blocked:
+			Start: 0
+		scroll-b-blocked:
+			Start: 0
+		scroll-l-blocked:
+			Start: 0
+		scroll-tr-blocked:
+			Start: 0
+		scroll-br-blocked:
+			Start: 0
+		scroll-bl-blocked:
+			Start: 0
+		scroll-tl-blocked:
+			Start: 0
+		joystick-t-blocked:
+			Start: 0
+		joystick-r-blocked:
+			Start: 0
+		joystick-b-blocked:
+			Start: 0
+		joystick-l-blocked:
+			Start: 0
+		joystick-tr-blocked:
+			Start: 0
+		joystick-br-blocked:
+			Start: 0
+		joystick-bl-blocked:
+			Start: 0
+		joystick-tl-blocked:
+			Start: 0

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>de.harmssi.thorkknd2</ApplicationId>
+    <ApplicationTitle>KKND2 Thor</ApplicationTitle>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+    <RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <!-- OpenRA creates traits/widgets via reflection: only framework assemblies get trimmed, engine ones are rooted -->
+    <TrimMode>partial</TrimMode>
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <AndroidUseAssemblyStore>true</AndroidUseAssemblyStore>
+    <EngineBin>$(MSBuildThisFileDirectory)../../engine/bin</EngineBin>
+    <NoWarn>$(NoWarn);XA4211;XA1006;CA1416;XA0141</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- engine + mod assemblies are built separately (thor/build-in-docker.sh) for net6.0 -->
+    <Reference Include="$(EngineBin)/*.dll" Exclude="$(EngineBin)/OpenRA.Utility.dll;$(EngineBin)/OpenRA.Server.dll;$(EngineBin)/OpenRA.Launcher.dll;$(EngineBin)/OpenRA.Mods.Cnc.dll;$(EngineBin)/OpenRA.Mods.D2k.dll;$(EngineBin)/OpenRA.Test.dll;$(EngineBin)/System.*.dll;$(EngineBin)/Microsoft.*.dll;$(EngineBin)/nunit*.dll;$(EngineBin)/NUnit*.dll" />
+    <TrimmerRootAssembly Include="@(Reference->'%(Filename)')" RootMode="All" />
+    <!-- SDL's Java side (native-out/java) + GameActivity (java/) are picked up by default globbing; Java-only, no C# bindings -->
+    <AndroidJavaSource Update="**/*.java" Bind="false" />
+    <AndroidNativeLibrary Remove="**/*.so" />
+    <AndroidNativeLibrary Include="native-out/*.so" Abi="arm64-v8a" />
+    <AndroidAsset Include="assets-out/data.zip" Link="Assets/data.zip" />
+  </ItemGroup>
+</Project>

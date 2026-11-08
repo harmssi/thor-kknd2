@@ -1,0 +1,104 @@
+^Palettes:
+	PaletteFromMobd@E_Spriteb:
+		Name: E_Spriteb
+		Filename: sprites|M_B_Outpost.mobd
+	OverlayPlayerColorPalette@E_Spriteb_player:
+		BasePalette: E_Spriteb
+		BaseName: E_Spriteb_player
+		RemapIndex: 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 50, 51, 52, 53, 54, 55, 76, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 129, 130, 132, 133, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 150, 151, 152, 153, 154, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 167, 168, 169, 190, 191, 215, 219
+
+	PaletteFromMobd@R_Spriteb:
+		Name: R_Spriteb
+		Filename: sprites|R_B_Outpost.mobd
+	OverlayPlayerColorPalette@R_Spriteb_player:
+		BasePalette: R_Spriteb
+		BaseName: R_Spriteb_player
+		RemapIndex: 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135
+
+	PaletteFromMobd@S_Spriteb:
+		Name: S_Spriteb
+		Filename: sprites|S_B_Outpost.mobd
+	OverlayPlayerColorPalette@S_Spriteb_player:
+		BasePalette: S_Spriteb
+		BaseName: S_Spriteb_player
+		RemapIndex: 31, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 104, 105, 106, 107, 108, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 170, 171, 172, 176, 177, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 217
+
+	PaletteFromMobd@B_Cursors:
+		Name: B_Cursors
+		Filename: sprites|B_Cursors.mobd
+	PaletteFromPaletteWithAlpha@B_Cursors_Alpha:
+		Name: B_Cursors_Alpha
+		BasePalette: B_Cursors
+		Alpha: 0.5
+
+	PaletteFromMobd@B_Explosions:
+		Name: B_Explosions
+		Filename: sprites|B_Explosions.mobd
+	PaletteFromMobd@P_Ballistics:
+		Name: P_Ballistics
+		Filename: sprites|P_Ballistics.mobd
+	PaletteFromMobd@P_Fire:
+		Name: P_Fire
+		Filename: sprites|P_Fire.mobd
+	PaletteFromMobd@P_GreenFire:
+		Name: P_GreenFire
+		Filename: sprites|P_GreenFire.mobd
+	PaletteFromMobd@P_GreenProjectiles:
+		Name: P_GreenProjectiles
+		Filename: sprites|P_GreenProjectiles.mobd
+	PaletteFromMobd@P_Laser:
+		Name: P_Laser
+		Filename: sprites|P_Laser.mobd
+	PaletteFromMobd@P_Projectiles:
+		Name: P_Projectiles
+		Filename: sprites|P_Projectiles.mobd
+	PaletteFromMobd@P_RedProjectiles:
+		Name: P_RedProjectiles
+		Filename: sprites|P_RedProjectiles.mobd
+	PaletteFromMobd@P_SmallProjectiles:
+		Name: P_SmallProjectiles
+		Filename: sprites|P_SmallProjectiles.mobd
+	PaletteFromMobd@P_Special:
+		Name: P_Special
+		Filename: sprites|P_Special.mobd
+
+	PaletteFromMobd@moveflash: # TODO remove this
+		Name: moveflash
+		Filename: sprites|B_Cursors.mobd
+
+	PaletteFromRGBA@highlight:
+		Name: highlight
+		R: 255
+		G: 255
+		B: 255
+		A: 128
+
+	ColorPickerPalette@colorpicker:
+		Name: colorpicker
+		BasePalette: S_Spriteb
+		RemapIndex: 31, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
+		AllowModifiers: false
+	PaletteFromPng@openkrush:
+		Name: openkrush
+		Filename: uibits/palette.png
+	PlayerColorPalette@player:
+		BasePalette: openkrush
+		RemapIndex: 8, 9, 10, 11, 12, 13
+	PaletteFromRGBA@shroud:
+		Name: shroud
+		R: 0
+		G: 0
+		B: 0
+		A: 255
+	PaletteFromRGBA@fog:
+		Name: fog
+		R: 0
+		G: 0
+		B: 0
+		A: 150
+	PaletteFromMobd@effect:
+		Name: effect
+		Filename: sprites|B_Explosions.mobd
+	PaletteFromMobd@B_Oil:
+		Name: B_Oil
+		Filename: sprites|B_Oil.mobd

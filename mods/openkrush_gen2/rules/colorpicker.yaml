@@ -1,0 +1,14 @@
+# Vorschau-Actor des Farbwaehlers (eine Mobile Outpost, Spielerfarbe ueber die Gebaeudepalette).
+colorpicker:
+	Inherits: survivors_mobileoutpost
+	Mobile:
+		InitialFacing: 512
+	RenderSprites:
+		Image: survivors_mobileoutpost
+		Palette: colorpicker
+	-TechLevelBuildable:
+	-MapEditorData:
+
+World:
+	ColorPickerManager:
+		PreviewActor: colorpicker

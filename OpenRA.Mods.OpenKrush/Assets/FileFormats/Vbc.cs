@@ -18,17 +18,17 @@ using Video;
 public class Vbc : IVideo
 {
 	public ushort FrameCount { get; }
-	public byte Framerate { get; }
+	public byte Framerate { get; private set; }
 	public ushort Width { get; }
 	public ushort Height { get; }
 	public byte[]? CurrentFrameData { get; private set; }
 	public string? TextData { get; private set; }
 	public int CurrentFrameIndex { get; private set; }
-	public bool HasAudio => true;
-	public byte[] AudioData { get; }
+	public bool HasAudio => this.AudioData.Length > 0;
+	public byte[] AudioData { get; private set; }
 	public int AudioChannels => 1;
-	public int SampleBits { get; }
-	public int SampleRate { get; }
+	public int SampleBits { get; private set; }
+	public int SampleRate { get; private set; }
 
 	private readonly VbcFrame[] frames;
 	private uint[,] currentFrame;
@@ -88,10 +88,25 @@ public class Vbc : IVideo
 			audio.WriteArray(frame.Audio);
 
 		this.AudioData = audio.ToArray();
-		var a = audio.Length / (this.SampleRate * 1 * (this.SampleBits / 8));
-		this.Framerate = (byte)(this.FrameCount / a);
+		// Steam re-release: some videos carry no (or too little) audio to derive the frame rate from
+		var seconds = this.SampleRate > 0 && this.SampleBits >= 8 ? audio.Length / (double)(this.SampleRate * (this.SampleBits / 8)) : 0;
+		this.Framerate = (byte)(seconds >= 1 ? Math.Clamp(this.FrameCount / seconds, 1, 60) : 15);
 
 		this.Reset();
+	}
+
+	/// <summary>Steam re-release: the picture files carry no sound; it lives in a per-language VBC (fmv/&lt;lang&gt;/) with a 4x4 dummy picture.</summary>
+	public void UseAudioFrom(Vbc other)
+	{
+		if (other.AudioData.Length == 0)
+			return;
+
+		this.AudioData = other.AudioData;
+		this.SampleBits = other.SampleBits;
+		this.SampleRate = other.SampleRate;
+		var seconds = this.AudioData.Length / (double)(this.SampleRate * (this.SampleBits / 8));
+		if (seconds >= 1)
+			this.Framerate = (byte)Math.Clamp(this.FrameCount / seconds, 1, 60);
 	}
 
 	public void AdvanceFrame()

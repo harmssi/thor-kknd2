@@ -4,3 +4,9 @@ bin
 obj
 .DS_Store
 .idea
+/dist/
+/thor/android/bin/
+/thor/android/obj/
+/thor/android/native-out/
+/thor/android/assets-out/
+/thor/shots/

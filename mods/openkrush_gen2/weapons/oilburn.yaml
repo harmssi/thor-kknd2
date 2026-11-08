@@ -1,0 +1,18 @@
+# Brennendes Oelfeld (OilPatch.Weapon), Schaden an allem im Radius.
+oilburn:
+	Range: 0c512
+	ReloadDelay: 1
+	Projectile: SourceExplosion
+	Warhead@1Damage: SpreadDamage
+		Damage: 1
+		DamageTypes: Fire
+		Spread: 0c512
+		Falloff: 100, 100
+		Versus:
+			infantry: 100
+			vehicle: 100
+			building: 100
+
+# Platzhalter-Waffe fuer AttackSuicides (die Explosion kommt aus Explodes).
+kamikaze_trigger:
+	Range: 1c0

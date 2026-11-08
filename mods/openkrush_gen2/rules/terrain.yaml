@@ -1,0 +1,8 @@
+# KKND2 ground comes from the original level file (MapdTerrain), not from tileset templates.
+^CoreWorld:
+	-TerrainRenderer:
+	MapdTerrain:
+	ThorDeckBridge:
+	Locomotor@infantry:
+		TerrainSpeeds:
+			Rough: 70

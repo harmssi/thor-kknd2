@@ -1,0 +1,19 @@
+# Eigene schlichte UI-Grafiken (uibits/, vom Mod erzeugt, nichts aus dem Spiel).
+shroud:
+	shroud: uibits/shroud.png
+		Length: 16
+	shroudfull: uibits/shroud.png
+		Start: 1
+	fog: uibits/fog.png
+		Length: 16
+	fogfull: uibits/fog.png
+		Start: 1
+
+font:
+	production: uibits/font-production.png
+		Length: 11
+
+beacon:
+	x: uibits/beacon.png
+		Length: 10
+		Tick: 100

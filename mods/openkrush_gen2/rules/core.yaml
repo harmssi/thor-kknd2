@@ -1,0 +1,86 @@
+# KKND2-spezifische Anpassungen am gemeinsamen Kern (openkrush|rules/core.yaml).
+^CoreConstruction:
+	ActorPreviewPlaceBuildingPreview:
+		Palette: B_Cursors_Alpha
+	Building:
+		# KKND2-Karten kennen nur Dirt und Street als bebaubar.
+		TerrainTypes: Dirt, Street
+		BuildSounds: sounds|167.soun
+
+^CoreWall:
+	-ExplosionOnDamageTransition@Critical:
+
+^CoreTower:
+	-ExplosionOnDamageTransition@Critical:
+
+^CoreInfantry:
+	WithDeathAnimation:
+		FallbackSequence: die
+
+^CoreAircraft:
+	# KKND2-Flugzeuge sind in den Skirmish-Regeln nicht baubar (siehe survivors-aircrafts.yaml & Co.).
+
+^AutoTargetDefault:
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Ground
+		InvalidTargets: NoAutoAttack
+
+^CoreWorld:
+	-TerrainRenderer:
+	ShroudRenderer:
+		# ShroudRenderer: Frame i zeigt die verdunkelten Ecken Index[i] (selbst gezeichnete Tiles, uibits/shroud.png).
+		Index: 0, 15, 3, 6, 12, 9, 11, 7, 14, 13, 1, 2, 4, 8, 5, 10
+		ShroudBlend: Alpha
+	Faction@Random:
+		RandomFactionMembers: survivors, evolved, series9
+	# Fahrzeuge fahren nur auf Dirt und Street, Infanterie zusaetzlich auf Rough (terrain.yaml).
+	Locomotor@infantry:
+		TerrainSpeeds:
+			Dirt: 100
+			Street: 100
+	Locomotor@vehicle:
+		TerrainSpeeds:
+			Dirt: 100
+			Street: 100
+	Locomotor@vehicleNonCrushing:
+		TerrainSpeeds:
+			Dirt: 100
+			Street: 100
+
+World:
+	-SmudgeLayer@CRATER:
+
+EditorWorld:
+	-MapdTerrain:
+	-ThorDeckBridge:
+	-EditorCursorLayer:
+	EditorSelectionLayer:
+		Palette: B_Cursors_Alpha
+	BuildableTerrainOverlay:
+		AllowedTerrainTypes: Dirt, Street
+
+# KKND2-Icons kommen aus den Original-Dateien; die Seitenleiste zeigt sonst die Actor-Vorschau.
+^CoreBuilding:
+	TechLevelBuildable:
+		Icon:
+
+^CoreTower:
+	TechLevelBuildable:
+		Icon:
+
+^CoreWall:
+	TechLevelBuildable:
+		Icon:
+
+^CoreInfantry:
+	TechLevelBuildable:
+		Icon:
+
+^CoreVehicle:
+	TechLevelBuildable:
+		Icon:
+
+^CoreAircraft:
+	TechLevelBuildable:
+		Icon:

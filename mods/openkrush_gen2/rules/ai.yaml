@@ -1,0 +1,9 @@
+Player:
+	ModularBot:
+		Name: Computer
+		Type: computer
+	GrantConditionOnBotOwner:
+		Condition: enable-ai
+		Bots: computer
+	BotAi:
+		RequiresCondition: enable-ai

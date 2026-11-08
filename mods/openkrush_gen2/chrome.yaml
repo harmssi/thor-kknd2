@@ -1,0 +1,385 @@
+^Chrome:
+	Image: uibits/chrome.png
+
+^Dialog:
+	Image: uibits/dialog.png
+
+^Glyphs:
+	Image: uibits/glyphs.png
+
+^Logo:
+	Image: uibits/logo.png
+
+command-icons:
+	Inherits: ^Chrome
+	Regions:
+		attack-move: 0, 0, 0, 0
+		attack-move-disabled: 0, 0, 0, 0
+		force-move: 0, 0, 0, 0
+		force-move-disabled: 0, 0, 0, 0
+		force-attack: 0, 0, 0, 0
+		force-attack-disabled: 0, 0, 0, 0
+		guard: 0, 0, 0, 0
+		guard-disabled: 0, 0, 0, 0
+		deploy: 0, 0, 0, 0
+		deploy-disabled: 0, 0, 0, 0
+		scatter: 0, 0, 0, 0
+		scatter-disabled: 0, 0, 0, 0
+		stop: 0, 0, 0, 0
+		stop-disabled: 0, 0, 0, 0
+		queue-orders: 0, 0, 0, 0
+		queue-orders-disabled: 0, 0, 0, 0
+
+command-icons-highlighted:
+	Inherits: command-icons
+
+stance-icons:
+	Inherits: ^Chrome
+	Regions:
+		attack-anything: 0, 0, 0, 0
+		attack-anything-disabled: 0, 0, 0, 0
+		defend: 0, 0, 0, 0
+		defend-disabled: 0, 0, 0, 0
+		return-fire: 0, 0, 0, 0
+		return-fire-disabled: 0, 0, 0, 0
+		hold-fire: 0, 0, 0, 0
+		hold-fire-disabled: 0, 0, 0, 0
+
+stance-icons-highlighted:
+	Inherits: stance-icons
+	Regions:
+		attack-anything: 0, 0, 0, 0
+		defend: 0, 0, 0, 0
+		return-fire: 0, 0, 0, 0
+		hold-fire: 0, 0, 0, 0
+
+# TODO split this!
+flags:
+	Inherits: ^Glyphs
+	Regions:
+		survivors: 0, 0, 0, 0
+		evolved: 0, 0, 0, 0
+		series9: 0, 0, 0, 0
+		spectator: 0, 0, 0, 0
+		Random: 0, 0, 0, 0
+
+# Used for the main menu frame
+dialog:
+	Inherits: ^Dialog
+	Regions:
+		background: 1, 1, 480, 480
+		border-r: 492, 1, 9, 190
+		border-l: 483, 1, 9, 190
+		border-b: 1, 492, 189, 9
+		border-t: 1, 483, 189, 9
+		corner-tl: 192, 483, 9, 9
+		corner-tr: 201, 483, 9, 9
+		corner-bl: 192, 492, 9, 9
+		corner-br: 201, 492, 9, 9
+
+# Used for Music and Map selection (normal button)
+dialog2:
+	Inherits: button
+
+# It's a Container, used in various places, like Hotkeys, ColorPicker, Asset Browser frames (looks like a pressed button)
+dialog3:
+	Inherits: ^Dialog
+	PanelRegion: 769, 1, 2, 2, 122, 122, 2, 2
+
+# Used for tooltips and the video player
+dialog4:
+	Inherits: ^Dialog
+	PanelRegion: 512, 387, 6, 6, 52, 52, 6, 6
+
+# completely black tile
+dialog5:
+	Inherits: ^Dialog
+	PanelRegion: 580, 388, 0, 0, 62, 62, 0, 0
+	PanelSides: Center
+
+lobby-bits:
+	Inherits: ^Glyphs
+	Regions:
+		spawn-claimed: 27, 119, 22, 22
+		spawn-unclaimed: 50, 119, 22, 22
+		spawn-disabled: 73, 119, 22, 22
+		admin: 170, 0, 6, 5
+		colorpicker: 27, 119, 22, 22
+		huepicker: 136, 0, 7, 15
+		kick: 153, 0, 11, 11
+		protected: 0, 17, 12, 13
+		protected-disabled: 17, 17, 12, 13
+		authentication: 34, 17, 12, 13
+		authentication-disabled: 51, 17, 12, 13
+		admin-registered: 0, 51, 16, 16
+		admin-anonymous: 34, 51, 16, 16
+		player-registered: 17, 51, 16, 16
+		player-anonymous: 51, 51, 16, 16
+
+reload-icon:
+	Inherits: ^Glyphs
+	Regions:
+		enabled: 0, 34, 16, 16
+		disabled-0: 17, 34, 16, 16
+		disabled-1: 34, 34, 16, 16
+		disabled-2: 51, 34, 16, 16
+		disabled-3: 68, 34, 16, 16
+		disabled-4: 85, 34, 16, 16
+		disabled-5: 102, 34, 16, 16
+		disabled-6: 119, 34, 16, 16
+		disabled-7: 136, 34, 16, 16
+		disabled-8: 153, 34, 16, 16
+		disabled-9: 170, 34, 16, 16
+		disabled-10: 187, 34, 16, 16
+		disabled-11: 204, 34, 16, 16
+
+music:
+	Inherits: ^Glyphs
+	Regions:
+		pause: 0, 0, 16, 16
+		stop: 17, 0, 16, 16
+		play: 34, 0, 16, 16
+		next: 51, 0, 16, 16
+		prev: 68, 0, 16, 16
+		fastforward: 85, 0, 16, 16
+
+progressbar-bg:
+	Inherits: dialog3
+
+progressbar-thumb:
+	Inherits: dialog3
+
+button:
+	Inherits: ^Dialog
+	PanelRegion: 513, 1, 3, 3, 120, 120, 3, 3
+
+# 5% lighter than a normal button (mouseover)
+button-hover:
+	Inherits: ^Dialog
+	PanelRegion: 513, 129, 3, 3, 120, 120, 3, 3
+
+button-pressed:
+	Inherits: ^Dialog
+	PanelRegion: 641, 1, 3, 3, 120, 120, 3, 3
+
+# 50% grey (disabled button)
+button-disabled:
+	Inherits: ^Dialog
+	PanelRegion: 513, 257, 3, 3, 120, 120, 3, 3
+
+button-highlighted:
+	Inherits: ^Dialog
+	PanelRegion: 769, 257, 3, 3, 120, 120, 3, 3
+
+button-highlighted-hover:
+	Inherits: button-highlighted
+
+button-highlighted-pressed:
+	Inherits: ^Dialog
+	PanelRegion: 897, 257, 3, 3, 120, 120, 3, 3
+
+button-highlighted-disabled:
+	Inherits: button-highlighted
+
+newsbutton:
+	Inherits: button
+
+newsbutton-hover:
+	Inherits: button-hover
+
+newsbutton-highlighted:
+	Inherits: button-hover
+
+newsbutton-highlighted-hover:
+	Inherits: newsbutton-highlighted
+
+newsbutton-highlighted-pressed:
+	Inherits: button-pressed
+
+newsbutton-pressed:
+	Inherits: button-pressed
+
+textfield:
+	Inherits: dialog3
+
+textfield-hover:
+	Inherits: dialog3
+
+textfield-disabled:
+	Inherits: dialog3
+
+textfield-focused:
+	Inherits: dialog3
+
+scrollpanel-bg:
+	Inherits: ^Dialog
+	PanelRegion: 769, 385, 3, 3, 120, 120, 3, 3
+
+scrollpanel-button:
+	Inherits: button
+
+scrollpanel-button-hover:
+	Inherits: button-hover
+
+scrollpanel-button-pressed:
+	Inherits: button-pressed
+
+scrollpanel-button-disabled:
+	Inherits: button-disabled
+
+slider:
+	Inherits: ^Dialog
+	Regions:
+		tick: 513, 2, 2, 4
+
+slider-track:
+	Inherits: button
+
+slider-thumb:
+	Inherits: button
+
+slider-thumb-hover:
+	Inherits: button-hover
+
+slider-thumb-pressed:
+	Inherits: button-pressed
+
+slider-thumb-disabled:
+	Inherits: button-disabled
+
+checkbox:
+	Inherits: dialog3
+
+checkmark-tick:
+	Inherits: ^Glyphs
+	Regions:
+		checked: 187, 0, 16, 16
+		checked-pressed: 204, 0, 16, 16
+		unchecked: 0, 0, 0, 0
+		unchecked-pressed: 204, 0, 16, 16
+
+checkmark-tick-highlighted:
+	Inherits: checkmark-tick
+
+checkmark-cross:
+	Inherits: ^Glyphs
+	Regions:
+		checked: 221, 0, 16, 16
+		checked-pressed: 238, 0, 16, 16
+		unchecked: 0, 0, 0, 0
+		unchecked-pressed: 238, 0, 16, 16
+
+checkmark-cross-highlighted:
+	Inherits: checkmark-cross
+
+checkmark-mute:
+	Inherits: ^Glyphs
+	Regions:
+		unchecked: 0, 170, 16, 16
+		unchecked-pressed: 17, 170, 16, 16
+		checked: 17, 170, 16, 16
+		checked-pressed: 0, 170, 16, 16
+
+checkmark-mute-highlighted:
+	Inherits: checkmark-mute
+
+checkbox-hover:
+	Inherits: ^Dialog
+	PanelRegion: 769, 129, 2, 2, 122, 122, 2, 2
+
+checkbox-pressed:
+	Inherits: checkbox-hover
+
+checkbox-disabled:
+	Inherits: dialog3
+
+checkbox-highlighted:
+	Inherits: checkbox-hover
+
+checkbox-highlighted-hover:
+	Inherits: checkbox-highlighted
+
+checkbox-highlighted-pressed:
+	Inherits: checkbox-highlighted
+
+checkbox-highlighted-disabled:
+	Inherits: checkbox-disabled
+
+checkbox-toggle:
+
+checkbox-toggle-hover:
+	Inherits: button
+
+checkbox-toggle-pressed:
+	Inherits: checkbox-pressed
+
+checkbox-toggle-highlighted:
+
+checkbox-toggle-highlighted-hover:
+	Inherits: button-highlighted
+
+checkbox-toggle-highlighted-pressed:
+	Inherits: checkbox-highlighted-pressed
+
+scrollitem:
+
+scrollitem-hover:
+	Inherits: ^Dialog
+	PanelRegion: 769, 129, 2, 2, 122, 122, 2, 2
+
+scrollitem-pressed:
+	Inherits: ^Dialog
+	PanelRegion: 769, 1, 2, 2, 122, 122, 2, 2
+
+scrollitem-highlighted:
+	Inherits: scrollitem-hover
+
+scrollitem-nohover:
+
+scrollitem-nohover-highlighted:
+
+scrollheader:
+	Inherits: button
+
+scrollheader-highlighted:
+	Inherits: button-hover
+
+mainmenu-border:
+	Inherits: ^Dialog
+	PanelRegion: 650, 389, 39, 39, 38, 38, 39, 39
+	PanelSides: Edges
+
+scrollpanel-decorations:
+	Inherits: ^Glyphs
+	Regions:
+		down: 68, 17, 16, 16
+		down-disabled: 85, 17, 16, 16
+		up: 102, 17, 16, 16
+		up-disabled: 119, 17, 16, 16
+		right: 136, 17, 16, 16
+		right-disabled: 153, 17, 16, 16
+		left: 170, 17, 16, 16
+		left-disabled: 187, 17, 16, 16
+
+dropdown-decorations:
+	Inherits: ^Glyphs
+	Regions:
+		marker: 68, 17, 16, 16
+		marker-disabled: 85, 17, 16, 16
+
+dropdown-separators:
+	Inherits: ^Dialog
+	Regions:
+		separator: 513, 2, 1, 19
+		separator-hover: 513, 130, 1, 19
+		separator-pressed: 766, 2, 1, 19
+		separator-disabled: 513, 258, 1, 19
+		observer-separator: 769, 258, 1, 19
+
+separator:
+	Inherits: button
+
+logos:
+	Inherits: ^Logo
+	Regions:
+		logo: 0, 0, 512, 128

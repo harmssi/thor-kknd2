@@ -1,19 +1,114 @@
-This repository contains the OpenKrush project on the [OpenRA](https://github.com/OpenRA/OpenRA) engine.
+# KKND2 Thor
 
-These scripts and support files wrap and automatically manage a copy of the OpenRA game engine and common files during development, and generates Windows installers, macOS .app bundles, and Linux [AppImages](https://appimage.org/) for distribution.
+**Unofficial** dual-screen port of *Krush Kill 'N Destroy 2: Krossfire* for the AYN Thor handheld, built on
+[OpenRA](https://github.com/OpenRA/OpenRA) and [OpenKrush](https://github.com/IceReaper/OpenKrush).
+A native arm64 Android app (.NET + SDL2 + OpenGL ES 3) – no Windows emulation. Deutsch: [unten](#deutsch).
 
-The key scripts in this SDK are:
+> You need your **own copy** of KKND2 Krossfire (Steam). This app contains **no game data**; graphics,
+> sound, music, videos and maps are read at runtime from the files you import.
 
-| Windows               | Linux / macOS            | Purpose
-| --------------------- | ------------------------ | ------------- |
-| make.cmd              | Makefile                 | Compiles your project and fetches dependencies (including the OpenRA engine).
-| launch-game.cmd       | launch-game.sh           | Launches your project from the SDK directory.
-| launch-server.cmd     | launch-server.sh         | Launches a dedicated server for your project from the SDK directory.
-| utility.cmd           | utility.sh         | Launches the OpenRA Utility for your project.
-| &lt;not available&gt; | packaging/package-all.sh | Generates release installers for your project.
+![Base and build menu](docs/images/01-base-and-build-menu.jpg)
 
-To launch your project from the development environment you must first compile the project by running `make.cmd` (Windows), or opening a terminal in the SDK directory and running `make` (Linux / macOS).  You can then run `launch-game.cmd` (Windows) or `launch-game.sh` (Linux / macOS) to run your game.
+- **Top screen:** the battlefield, full screen, no sidebar. Touch: tap = select / command,
+  drag = selection box, two-finger drag = scroll, two-finger tap = deselect.
+- **Bottom screen (deck):** the complete build menu – Infantry / Vehicles / Buildings / Defense, one queue per
+  factory, the game's own unit and building pictures, cost in oil, progress and queue count; locked or
+  unaffordable entries are greyed out. Tap = build or queue (buildings: tap, then place on the top screen),
+  long-press = hold, again = cancel. Next to it: minimap (tap/drag = jump), oil, selection, control groups
+  (tap = select, tap again = jump, long-press = assign) and Deploy, Stop, Attack, Move, Waypoint, Sell,
+  Repair, Menu, Save.
+- **Controller:** left stick = cursor, right stick = scroll, A = left click, B = right click / deselect,
+  X = stop, Y = attack-move, L3 = deploy, L1/R1 = focus ring over the build cards (A builds),
+  L2/R2 = deck tab, D-pad = groups 1–4, Select = menu, Start = Enter.
+- **Content:** Survivors, Evolved and Series 9 in skirmish against the AI on the 15 original multiplayer
+  maps (converted on the device; the ground is drawn straight from the original level files).
+  Original announcer, unit voices, sound effects and music; the intro videos play. Save and load work.
+  60 fps on the Thor.
 
-The `example` mod included in this repository provides the bare minimum structure to launch to the in-game main menu for the sole purpose of demonstrating the SDK.  See [Getting Started](https://github.com/OpenRA/OpenRAModTemplate/wiki/Getting-Started) on the Wiki for instructions on how to adapt this template for your own projects.  For common questions, please see the [FAQ](https://github.com/OpenRA/OpenRAModSDK/wiki/FAQ).  See [Updating to a new SDK or Engine version](https://github.com/OpenRA/OpenRAModSDK/wiki/Updating-to-a-new-SDK-or-Engine-version) for a guide on updating your mod a newer OpenRA release.
+| Attack | Victory | Evolved | Series 9 |
+|---|---|---|---|
+| ![](docs/images/02-attack.jpg) | ![](docs/images/03-victory.jpg) | ![](docs/images/04-evolved.jpg) | ![](docs/images/05-series9.jpg) |
 
-The OpenRA engine and SDK scripts are made available under the [GPLv3](https://github.com/OpenRA/OpenRA/blob/bleed/COPYING) license, and any executable code developed by a mod and loaded by the engine (i.e. custom mod DLLs, lua scripts) must be released under a compatible license.  Your mod data files (artwork, sound files, yaml, etc) are not part of your mod's source code, so your are free to distribute these assets under different terms (e.g. allowing redistribution in unmodified form, but not for use in other works).
+![All 15 maps](docs/images/07-all-15-maps.jpg)
+
+Screenshots: AYN Thor, rendered from the author's own Steam copy.
+
+## Install
+
+1. **Own the game:** *Krush Kill 'N Destroy 2: Krossfire* on Steam (App 1292180).
+2. **Copy the game folder to the Thor**, at least `levels`, `music` and `fmv`:
+   - **From a PC:** Steam → right-click the game → Manage → Browse local files → copy the folder
+     `KKND 2 Krossfire` over USB to the Thor (internal storage or SD card, e.g. `Download`).
+   - **With DroidDeck on the Thor:** install the game in DroidDeck's Steam. Android does not let other apps
+     read DroidDeck's folder, so copy `Android/data/com.droiddeck.launcher/files/steam/steamapps/common/KKND 2 Krossfire`
+     with a PC over USB to a normal folder first.
+3. **Install the APK** from the [latest release](../../releases/latest).
+4. **First start:** tap **Choose Steam folder** and pick `KKND 2 Krossfire` → *Use this folder* → *Allow*.
+   About 560 MB are copied into the app's folder (SD card if present) and the 15 maps are built.
+5. **Play:** Singleplayer → Skirmish, add a computer player, Start Game. Tap **Deploy** on the deck to
+   set up your Outpost.
+
+Saves: `Android/data/de.harmssi.thorkknd2/files/support/Saves`.
+
+## Known limits (v0.1.0)
+
+- **No campaigns** yet (17 missions per faction need their own mission scripts). Skirmish only.
+- No aircraft; balance follows OpenKrush's unfinished 2020 KKND2 rules, not tuned against the original.
+- Only the English sound set and the English video sound tracks are used.
+- Multiplayer over the network is untested.
+- Tested on the AYN Thor (Android 13) with the Steam version.
+
+## Build
+
+`thor/build.sh [--install]` builds `dist/ThorKKND2.apk` in Docker on a Linux host (`thor/docker/Dockerfile`;
+settings in `~/.config/thorkknd2/env`: `THOR_BUILD_HOST`, `THOR_BUILD_DIR`, `ANDROID_SERIAL`). The OpenRA
+engine is fetched by `fetch-engine.sh` and patched with `thor/apply-engine-patches.sh` (bundled assemblies,
+frame hook for controller input, MonoVM fix). Native libraries (SDL2, OpenAL Soft, FreeType, Lua 5.1) are
+built from source (`thor/native/build-native.sh`). `thor/dev/check.sh` runs the OpenRA utility checks.
+UI images: `thor/gen_uibits.py`, `thor/make_glyphs.py`, icon `thor/make_icon.py`.
+
+## Credits and license
+
+- [OpenRA](https://github.com/OpenRA/OpenRA) – engine, GPLv3.
+- [IceReaper/OpenKrush](https://github.com/IceReaper/OpenKrush) – KKND file formats, mechanics and the
+  original KKND2 rules (branch `old_defective_kknd2`), GPLv3.
+- [Dzierzan](https://github.com/Dzierzan) – KKnD/OpenKrush work and the KKnD fork that started this.
+- SDL2 (zlib), OpenAL Soft (LGPL-2.1), FreeType (FTL), Lua 5.1 (MIT), Inter and JetBrains Mono (OFL-1.1).
+- UI images in `mods/openkrush_gen2/uibits` and the app icon are original work, CC0.
+
+This port is free software under the GNU GPL v3 (see `COPYING`). *Krush Kill 'N Destroy* and *KKND* are
+trademarks of their respective owners. This is an unofficial fan project, not affiliated with or endorsed
+by them. You need your own game files.
+
+---
+
+## Deutsch
+
+**Inoffizieller** Dual-Screen-Port von *Krush Kill 'N Destroy 2: Krossfire* für den AYN Thor, auf Basis von
+OpenRA und OpenKrush. Native arm64-Android-App, keine Windows-Emulation.
+
+> Du brauchst deine **eigene Kopie** von KKND2 Krossfire (Steam). Die App enthält **keine Spieldaten**.
+
+- **Oben:** Spielfeld im Vollbild ohne Seitenleiste. Touch: Tippen = auswählen/befehlen, Ziehen =
+  Auswahlrahmen, zwei Finger = scrollen, Zwei-Finger-Tipp = abwählen.
+- **Unten (Deck):** das komplette Baumenü (Infanterie / Fahrzeuge / Gebäude / Abwehr, je Fabrik eine
+  Warteschlange, Original-Bilder aus deinen Spieldateien, Kosten in Öl, Fortschritt, gesperrt/zu teuer
+  ausgegraut; Tippen = bauen, lange drücken = anhalten, nochmal = abbrechen), Minikarte, Öl, Auswahl,
+  Kontrollgruppen und Aufbauen, Stopp, Angriff, Bewegen, Wegpunkt, Verkaufen, Reparieren, Menü, Speichern.
+- **Controller:** linker Stick = Cursor, rechter Stick = Scrollen, A = Linksklick, B = Rechtsklick,
+  X = Stopp, Y = Angriffsbewegung, L3 = Aufbauen, L1/R1 = Fokus über die Baukarten (A baut),
+  L2/R2 = Deck-Reiter, Steuerkreuz = Gruppen 1–4, Select = Menü, Start = Enter.
+- **Inhalt:** Survivors, Evolved und Series 9 im Gefecht gegen die KI auf den 15 Original-Mehrspielerkarten,
+  Original-Ansagen, Stimmen, Effekte und Musik, Intro-Videos, Speichern/Laden, 60 fps.
+
+**Installation:** Spielordner `KKND 2 Krossfire` (mindestens `levels`, `music`, `fmv`) aufs Gerät kopieren –
+vom PC (Steam → Verwalten → Lokale Dateien durchsuchen) oder aus DroidDecks Steam-Ordner per PC in einen
+normalen Ordner. APK aus dem [Release](../../releases/latest) installieren, **Steam-Ordner wählen** antippen,
+`KKND 2 Krossfire` auswählen. Dann Einzelspieler → Gefecht, Computer-Gegner hinzufügen, starten und unten
+**Aufbauen** tippen.
+
+**Grenzen von v0.1.0:** keine Kampagnen, keine Flugzeuge, Werte nicht ans Original angeglichen, nur
+englischer Tonsatz, Netzwerkspiel ungetestet.
+
+Dank an OpenRA, IceReaper/OpenKrush und Dzierzan. Lizenz: GNU GPL v3. Inoffiziell, nicht mit den
+Rechteinhabern verbunden; eigene Spieldaten nötig.

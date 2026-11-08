@@ -1,0 +1,3 @@
+# Upstream OpenKrush history (IceReaper, 2022): the public Discord *application/client ID* of OpenKrush in mod.config.
+# Client IDs are public identifiers, not secrets; KKND2 Thor removed it from the current tree (mod.config).
+55b8868660e3ade77c801b018a544216fb362ccf:mod.config:discord-client-id:66

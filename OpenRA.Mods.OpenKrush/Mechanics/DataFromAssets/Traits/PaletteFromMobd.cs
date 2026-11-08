@@ -51,7 +51,9 @@ public class PaletteFromMobdInfo : TraitInfo, IProvidesCursorPaletteInfo
 		if (fileSystem.Open(this.Filename) is not SegmentStream segmentStream)
 			return new(colors);
 
-		var mobd = new Mobd(segmentStream);
+		// MOBD uses offsets from the LVL start, so read from the base stream (same as MobdLoader).
+		segmentStream.BaseStream.Position = segmentStream.BaseOffset;
+		var mobd = new Mobd(segmentStream.BaseStream);
 		var frame = mobd.RotationalAnimations.FirstOrDefault(a => a.Frames.Length > 0) ?? mobd.SimpleAnimations.FirstOrDefault(a => a.Frames.Length > 0);
 
 		if (frame == null)

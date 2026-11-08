@@ -1,0 +1,201 @@
+# TODO cleanup unused ones!
+EvolvedVoice: # 54-68
+	DefaultVariant:
+	Voices:
+		Create: sounds|65.soun, sounds|66.soun, sounds|67.soun, sounds|68.soun
+		Select: sounds|65.soun, sounds|66.soun, sounds|67.soun, sounds|68.soun
+		Action: sounds|60.soun, sounds|61.soun, sounds|62.soun, sounds|63.soun
+		Attack: sounds|54.soun, sounds|55.soun, sounds|56.soun, sounds|57.soun
+		Conquer: sounds|54.soun
+		Repair: sounds|60.soun
+		Repairing: 
+		Enter: sounds|60.soun, sounds|61.soun, sounds|62.soun, sounds|63.soun
+		Sacrifice: sounds|60.soun, sounds|61.soun, sounds|62.soun, sounds|63.soun
+		Sacrificed: sounds|175.soun, sounds|176.soun, sounds|177.soun
+		Die: sounds|133.soun,sounds|134.soun,sounds|135.soun,sounds|136.soun,sounds|137.soun
+
+EvolvedVeteranVoice: # 69-80
+	DefaultVariant:
+	Voices:
+		Select: sounds|77.soun, sounds|78.soun, sounds|79.soun, sounds|80.soun
+		Action: sounds|73.soun, sounds|74.soun, sounds|75.soun, sounds|76.soun
+		Attack: sounds|69.soun, sounds|70.soun, sounds|71.soun
+		Conquer: sounds|75.soun
+		Repair: sounds|75.soun
+		Repairing: 
+		Enter: sounds|73.soun, sounds|74.soun, sounds|75.soun, sounds|76.soun
+		Sacrifice: sounds|73.soun, sounds|74.soun, sounds|75.soun, sounds|76.soun
+		Sacrificed: sounds|175.soun, sounds|176.soun, sounds|177.soun
+		Die: sounds|133.soun,sounds|134.soun,sounds|135.soun,sounds|136.soun,sounds|137.soun
+
+		Create:
+SurvivorsVoice: # 13-31
+	DefaultVariant:
+	Voices:
+		Create:
+		Select: sounds|26.soun, sounds|27.soun
+		Action: sounds|20.soun, sounds|19.soun, sounds|21.soun
+		Attack: sounds|13.soun, sounds|14.soun
+		Conquer: sounds|24.soun
+		Repair:
+		Repairing:
+		Enter: sounds|20.soun, sounds|19.soun, sounds|21.soun
+		Sacrifice: sounds|20.soun, sounds|19.soun, sounds|21.soun
+		Sacrificed: sounds|175.soun, sounds|176.soun, sounds|177.soun
+		Die: sounds|133.soun,sounds|134.soun,sounds|135.soun,sounds|136.soun,sounds|137.soun
+
+SurvivorsVeteranVoice: # 32-39
+	DefaultVariant:
+	Voices:
+		Select: sounds|33.soun, sounds|37.soun
+		Action: sounds|32.soun, sounds|33.soun
+		Attack:
+		Conquer: sounds|24.soun
+		Repair:
+		Repairing:
+		Enter: sounds|32.soun, sounds|33.soun
+		Sacrifice: sounds|32.soun, sounds|33.soun
+		Sacrificed: sounds|175.soun, sounds|176.soun, sounds|177.soun
+		Die: sounds|133.soun,sounds|134.soun,sounds|135.soun,sounds|136.soun,sounds|137.soun
+
+		Create:
+Series9Voice: # 95-109
+	DefaultVariant:
+	Voices:
+		Create: sounds|106.soun, sounds|107.soun, sounds|108.soun, sounds|109.soun
+		Select: sounds|106.soun, sounds|107.soun, sounds|108.soun, sounds|109.soun
+		Action: sounds|101.soun, sounds|102.soun, sounds|103.soun, sounds|104.soun
+		Attack: sounds|95.soun, sounds|96.soun, sounds|97.soun, sounds|98.soun
+		Conquer: sounds|103.soun
+		Repair: sounds|103.soun
+		Repairing: 
+		Enter: sounds|101.soun, sounds|102.soun, sounds|103.soun, sounds|104.soun
+		Sacrifice: sounds|101.soun, sounds|102.soun, sounds|103.soun, sounds|104.soun
+		Sacrificed: sounds|175.soun, sounds|176.soun, sounds|177.soun
+		Die:
+
+Series9VeteranVoice: # 110-121
+	DefaultVariant:
+	Voices:
+		Select: sounds|118.soun, sounds|119.soun, sounds|120.soun, sounds|121.soun
+		Action: sounds|114.soun, sounds|115.soun, sounds|116.soun, sounds|117.soun
+		Attack: sounds|110.soun, sounds|111.soun, sounds|112.soun
+		Conquer: sounds|110.soun
+		Repair: sounds|110.soun
+		Enter: sounds|110.soun
+		Sacrifice: sounds|95.soun
+		Sacrificed: sounds|95.soun
+		Die:
+
+		Create:
+		Repairing:
+BunkerVoice: # 138-145
+	DefaultVariant:
+	Voices:
+		Create:
+		Select: sounds|140.soun, sounds|141.soun
+		Action: sounds|140.soun, sounds|141.soun, sounds|142.soun, sounds|143.soun
+		Attack: sounds|138.soun, sounds|139.soun, sounds|144.soun
+
+		Die:
+		Repair:
+		Repairing:
+WolfVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|126.soun
+		Select: sounds|126.soun
+		Action: sounds|125.soun
+		Attack:
+
+		Die:
+		Repair:
+		Repairing:
+ScorpionVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|131.soun
+		Select: sounds|131.soun
+		Action: sounds|132.soun
+		Attack: sounds|132.soun
+
+		Die:
+		Repair:
+		Repairing:
+MastodonVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|124.soun
+		Select: sounds|124.soun
+		Action: sounds|123.soun
+		Attack:
+
+		Die:
+		Repair:
+		Repairing:
+BeetleVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|127.soun
+		Select: sounds|127.soun
+		Action: sounds|128.soun
+		Attack: sounds|128.soun
+
+		Die:
+		Repair:
+		Repairing:
+CrabVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|129.soun
+		Select: sounds|129.soun
+		Action: sounds|130.soun
+		Attack: sounds|130.soun
+
+		Die:
+		Repair:
+		Repairing:
+HippoVoice:
+	DefaultVariant:
+	Voices:
+		Create:
+		Select:
+		Action:
+		Attack:
+
+		Die:
+		Repair:
+		Repairing:
+PterodactylusVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|131.soun
+		Select: sounds|131.soun
+		Action: sounds|132.soun
+		Attack: sounds|132.soun
+
+		Die:
+		Repair:
+		Repairing:
+WaspVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|127.soun
+		Select: sounds|127.soun
+		Action: sounds|128.soun
+		Attack: sounds|128.soun
+
+		Die:
+		Repair:
+		Repairing:
+DemonVoice:
+	DefaultVariant:
+	Voices:
+		Create: sounds|181.soun
+		Select: sounds|181.soun
+		Action: sounds|182.soun
+		Attack: sounds|182.soun
+		Die: 
+
+		Repair:
+		Repairing:

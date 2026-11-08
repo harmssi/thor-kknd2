@@ -1,0 +1,296 @@
+Metadata:
+	Title: KKND2 Thor
+	Version: 0.1.0
+	Website: https://github.com/IceReaper/OpenKrush/
+	WindowTitle: KKND2 Thor
+
+PackageFormats: LvlPackage
+
+# Original game files are imported on the device from the owner's own Steam copy (never shipped).
+Packages:
+	~^SupportDir|Content/openkrush_gen2/: original_gen2
+	^EngineDir
+	$openkrush: openkrush
+	$openkrush_gen2: openkrush_gen2
+	^EngineDir|mods/common: common
+	~original_gen2|fmv: gen2_fmv
+	~original_gen2|music: gen2_music
+	~original_gen2|levels: gen2_levels
+	~original_gen2|levels/sprite.lpk: sprites
+	~original_gen2|levels/sound_en.spk: sounds
+	~original_gen2|levels/surv.bpk: surv.bpk
+	~original_gen2|levels/mute.bpk: mute.bpk
+	~original_gen2|levels/robo.bpk: robo.bpk
+
+MapFolders:
+	~^SupportDir|maps/openkrush_gen2/imported: System
+	~^SupportDir|maps/openkrush_gen2/{DEV_VERSION}: User
+
+Rules:
+	openkrush|rules/core.yaml
+	openkrush|rules/misc.yaml
+	openkrush|rules/palettes.yaml
+	openkrush|actors/oilpatch.yaml
+	openkrush|actors/mpspawn/rules.yaml
+	openkrush_gen2|rules/terrain.yaml
+	openkrush_gen2|rules/core.yaml
+	openkrush_gen2|rules/palettes.yaml
+	openkrush_gen2|rules/misc.yaml
+	openkrush_gen2|rules/colorpicker.yaml
+	openkrush_gen2|rules/bunkers.yaml
+	openkrush_gen2|rules/survivors.yaml
+	openkrush_gen2|rules/survivors-infantry.yaml
+	openkrush_gen2|rules/survivors-vehicles.yaml
+	openkrush_gen2|rules/survivors-aircrafts.yaml
+	openkrush_gen2|rules/survivors-buildings.yaml
+	openkrush_gen2|rules/survivors-towers.yaml
+	openkrush_gen2|rules/survivors-walls.yaml
+	openkrush_gen2|rules/evolved.yaml
+	openkrush_gen2|rules/evolved-infantry.yaml
+	openkrush_gen2|rules/evolved-vehicles.yaml
+	openkrush_gen2|rules/evolved-aircrafts.yaml
+	openkrush_gen2|rules/evolved-buildings.yaml
+	openkrush_gen2|rules/evolved-towers.yaml
+	openkrush_gen2|rules/evolved-walls.yaml
+	openkrush_gen2|rules/series9.yaml
+	openkrush_gen2|rules/series9-infantry.yaml
+	openkrush_gen2|rules/series9-vehicles.yaml
+	openkrush_gen2|rules/series9-aircrafts.yaml
+	openkrush_gen2|rules/series9-buildings.yaml
+	openkrush_gen2|rules/series9-towers.yaml
+	openkrush_gen2|rules/series9-walls.yaml
+	openkrush_gen2|rules/ai.yaml
+
+Sequences:
+	openkrush|actors/mpspawn/sequences.yaml
+	openkrush_gen2|sequences/misc.yaml
+	openkrush_gen2|sequences/ui.yaml
+	openkrush_gen2|sequences/weapons.yaml
+	openkrush_gen2|sequences/bunkers.yaml
+	openkrush_gen2|sequences/survivors.yaml
+	openkrush_gen2|sequences/survivors-infantry.yaml
+	openkrush_gen2|sequences/survivors-vehicles.yaml
+	openkrush_gen2|sequences/survivors-aircrafts.yaml
+	openkrush_gen2|sequences/survivors-buildings.yaml
+	openkrush_gen2|sequences/survivors-towers.yaml
+	openkrush_gen2|sequences/survivors-walls.yaml
+	openkrush_gen2|sequences/evolved.yaml
+	openkrush_gen2|sequences/evolved-infantry.yaml
+	openkrush_gen2|sequences/evolved-vehicles.yaml
+	openkrush_gen2|sequences/evolved-aircrafts.yaml
+	openkrush_gen2|sequences/evolved-buildings.yaml
+	openkrush_gen2|sequences/evolved-towers.yaml
+	openkrush_gen2|sequences/evolved-walls.yaml
+	openkrush_gen2|sequences/series9.yaml
+	openkrush_gen2|sequences/series9-infantry.yaml
+	openkrush_gen2|sequences/series9-vehicles.yaml
+	openkrush_gen2|sequences/series9-aircrafts.yaml
+	openkrush_gen2|sequences/series9-buildings.yaml
+	openkrush_gen2|sequences/series9-towers.yaml
+	openkrush_gen2|sequences/series9-walls.yaml
+
+Weapons:
+	openkrush_gen2|weapons/misc.yaml
+	openkrush_gen2|weapons/bunkers.yaml
+	openkrush_gen2|weapons/oilburn.yaml
+	openkrush_gen2|weapons/survivors-infantry.yaml
+	openkrush_gen2|weapons/survivors-vehicles.yaml
+	openkrush_gen2|weapons/survivors-aircrafts.yaml
+	openkrush_gen2|weapons/survivors-towers.yaml
+	openkrush_gen2|weapons/evolved-infantry.yaml
+	openkrush_gen2|weapons/evolved-vehicles.yaml
+	openkrush_gen2|weapons/evolved-aircrafts.yaml
+	openkrush_gen2|weapons/evolved-towers.yaml
+	openkrush_gen2|weapons/series9-infantry.yaml
+	openkrush_gen2|weapons/series9-vehicles.yaml
+	openkrush_gen2|weapons/series9-aircrafts.yaml
+	openkrush_gen2|weapons/series9-towers.yaml
+	openkrush_gen2|weapons/shrapnel.yaml
+
+Voices:
+	openkrush_gen2|audio/voices.yaml
+
+Notifications:
+	openkrush_gen2|audio/notifications.yaml
+
+Cursors:
+	openkrush_gen2|cursors.yaml
+
+Chrome:
+	openkrush_gen2|chrome.yaml
+
+TileSets:
+	openkrush_gen2|tilesets/kknd2/tileset.yaml
+
+Assemblies:
+	^BinDir|OpenRA.Mods.Common.dll
+	^BinDir|OpenRA.Mods.OpenKrush.dll
+
+Music:
+	openkrush_gen2|audio/music.yaml
+
+ChromeLayout:
+	common|chrome/ingame.yaml
+	common|chrome/ingame-chat.yaml
+	common|chrome/ingame-transients.yaml
+	common|chrome/ingame-fmvplayer.yaml
+	common|chrome/ingame-info.yaml
+	common|chrome/ingame-infoscripterror.yaml
+	common|chrome/ingame-infobriefing.yaml
+	common|chrome/ingame-infoobjectives.yaml
+	common|chrome/ingame-infostats.yaml
+	common|chrome/ingame-info-lobby-options.yaml
+	openkrush|chrome/ingame-menu.yaml
+	common|chrome/ingame-observer.yaml
+	openkrush|chrome/ingame-player.yaml
+	common|chrome/ingame-perf.yaml
+	common|chrome/ingame-debug.yaml
+	common|chrome/ingame-debuginfo.yaml
+	common|chrome/ingame-infochat.yaml
+	openkrush_gen2|chrome/mainmenu.yaml
+	common|chrome/mainmenu-prompts.yaml
+	common|chrome/settings.yaml
+	common|chrome/settings-display.yaml
+	common|chrome/settings-audio.yaml
+	common|chrome/settings-input.yaml
+	common|chrome/settings-hotkeys.yaml
+	common|chrome/settings-advanced.yaml
+	common|chrome/credits.yaml
+	common|chrome/lobby.yaml
+	common|chrome/lobby-mappreview.yaml
+	common|chrome/lobby-players.yaml
+	common|chrome/lobby-options.yaml
+	common|chrome/lobby-music.yaml
+	common|chrome/lobby-servers.yaml
+	common|chrome/lobby-kickdialogs.yaml
+	common|chrome/color-picker.yaml
+	common|chrome/map-chooser.yaml
+	common|chrome/multiplayer-browser.yaml
+	common|chrome/multiplayer-browserpanels.yaml
+	common|chrome/multiplayer-createserver.yaml
+	common|chrome/multiplayer-directconnect.yaml
+	common|chrome/connection.yaml
+	common|chrome/replaybrowser.yaml
+	common|chrome/gamesave-browser.yaml
+	common|chrome/gamesave-loading.yaml
+	common|chrome/dropdowns.yaml
+	common|chrome/musicplayer.yaml
+	common|chrome/tooltips.yaml
+	common|chrome/assetbrowser.yaml
+	common|chrome/missionbrowser.yaml
+	common|chrome/confirmation-dialogs.yaml
+	common|chrome/editor.yaml
+	common|chrome/playerprofile.yaml
+	common|chrome/text-notifications.yaml
+
+Translations:
+	common|languages/en.ftl
+
+Hotkeys:
+	common|hotkeys/chat.yaml
+	common|hotkeys/control-groups.yaml
+	common|hotkeys/editor.yaml
+	common|hotkeys/game.yaml
+	openkrush|hotkeys/game.yaml
+	common|hotkeys/observer.yaml
+	common|hotkeys/production-common.yaml
+	openkrush|hotkeys/production.yaml
+	common|hotkeys/supportpowers.yaml
+	common|hotkeys/viewport.yaml
+
+LoadScreen: LoadScreen
+
+ServerTraits:
+	LobbyCommands
+	PlayerPinger
+	MasterServerPinger
+	LobbySettingsNotification
+
+ChromeMetrics:
+	common|metrics.yaml
+	openkrush_gen2|metrics.yaml
+
+Fonts:
+	Tiny:
+		Font: openkrush_gen2|fonts/Inter-Regular.ttf
+		Size: 10
+		Ascender: 8
+	TinyBold:
+		Font: openkrush_gen2|fonts/Inter-Bold.ttf
+		Size: 10
+		Ascender: 8
+	Small:
+		Font: openkrush_gen2|fonts/Inter-Regular.ttf
+		Size: 12
+		Ascender: 9
+	SmallBold:
+		Font: openkrush_gen2|fonts/Inter-Bold.ttf
+		Size: 12
+		Ascender: 9
+	Regular:
+		Font: openkrush_gen2|fonts/Inter-Regular.ttf
+		Size: 14
+		Ascender: 11
+	Bold:
+		Font: openkrush_gen2|fonts/Inter-Bold.ttf
+		Size: 14
+		Ascender: 11
+	Medium:
+		Font: openkrush_gen2|fonts/Inter-Regular.ttf
+		Size: 18
+		Ascender: 14
+	MediumBold:
+		Font: openkrush_gen2|fonts/Inter-Bold.ttf
+		Size: 18
+		Ascender: 14
+	Title:
+		Font: openkrush_gen2|fonts/Inter-Bold.ttf
+		Size: 32
+		Ascender: 26
+
+Missions:
+
+MapGrid:
+	TileSize: 32,32
+	Type: Rectangular
+
+DefaultOrderGenerator: UnitOrderGenerator
+
+SupportsMapsFrom: openkrush_gen2
+
+SoundFormats: Wav, Soun, Son
+
+SpriteFormats: PngSheet, Mobd, Mapd, Blit
+
+VideoFormats: Vbc
+
+TerrainFormat: DefaultTerrain
+
+SpriteSequenceFormat: OffsetsSpriteSequence
+
+ModelSequenceFormat: PlaceholderModelSequence
+
+AssetBrowser:
+	SpriteExtensions: .mobd, .mapd, .blit
+	AudioExtensions: .wav, .soun, .son
+	VideoExtensions: .vbc
+
+GameSpeeds:
+	DefaultSpeed: default
+	Speeds:
+		slower:
+			Name: Slower
+			Timestep: 50
+			OrderLatency: 3
+		default:
+			Name: Normal
+			Timestep: 40
+			OrderLatency: 3
+		fast:
+			Name: Fast
+			Timestep: 35
+			OrderLatency: 4
+		faster:
+			Name: Faster
+			Timestep: 30
+			OrderLatency: 4

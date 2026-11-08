@@ -1,0 +1,71 @@
+overlay:
+	build-valid: sprites|B_Cursors.mobd
+		Start: 132
+		Offset: -16, -16
+	build-invalid: sprites|B_Cursors.mobd
+		Start: 131
+		Offset: -16, -16
+
+editor-overlay:
+	copy: sprites|B_Cursors.mobd
+		Start: 131
+		Offset: -16, -16
+	paste: sprites|B_Cursors.mobd
+		Start: 132
+		Offset: -16, -16
+
+moveflsh:
+	idle: sprites|B_Cursors.mobd
+		Start: 119 # or 130
+		Length: 11
+
+indicators:
+	repair: sprites|B_Oil.mobd # TODO wrong
+	research0: sprites|B_Cursors.mobd
+		Start: 141
+	research1: sprites|B_Cursors.mobd
+		Start: 142
+	research2: sprites|B_Cursors.mobd
+		Start: 143
+	research3: sprites|B_Cursors.mobd
+		Start: 144
+	research4: sprites|B_Cursors.mobd
+		Start: 145
+	research5: sprites|B_Cursors.mobd
+		Start: 146
+	research6: sprites|B_Cursors.mobd
+		Start: 147
+	research7: sprites|B_Cursors.mobd
+		Start: 148
+	research8: sprites|B_Cursors.mobd
+		Start: 149
+	research9: sprites|B_Cursors.mobd
+		Start: 150
+	research10: sprites|B_Cursors.mobd
+		Start: 151
+	research11: sprites|B_Cursors.mobd
+		Start: 152
+	research12: sprites|B_Cursors.mobd
+		Start: 153
+	research13: sprites|B_Cursors.mobd
+		Start: 154
+	research14: sprites|B_Cursors.mobd
+		Start: 155
+	research15: sprites|B_Cursors.mobd
+		Start: 156
+	research16: sprites|B_Cursors.mobd
+		Start: 157
+	research17: sprites|B_Cursors.mobd
+		Start: 158
+	research18: sprites|B_Cursors.mobd
+		Start: 159
+	research19: sprites|B_Cursors.mobd
+		Start: 160
+
+oilpatch:
+	idle: sprites|B_Oil.mobd
+		Length: 14
+		Tick: 70
+		ZOffset: -2000
+	burn: sprites|B_Oil.mobd # TODO wrong
+
