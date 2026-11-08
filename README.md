@@ -9,6 +9,8 @@ A native arm64 Android app (.NET + SDL2 + OpenGL ES 3) – no Windows emulation.
 
 ![Base and build menu](docs/images/01-base-and-build-menu.jpg)
 
+Videos: [showcase](https://youtu.be/qjxeIWKOAXM) · [install guide](https://youtu.be/-_eO1crVv4I)
+
 - **Top screen:** the battlefield, full screen, no sidebar. Touch: tap = select / command,
   drag = selection box, two-finger drag = scroll, two-finger tap = deselect.
 - **Bottom screen (deck):** the complete build menu – Infantry / Vehicles / Buildings / Defense, one queue per
@@ -88,6 +90,8 @@ by them. You need your own game files.
 OpenRA und OpenKrush. Native arm64-Android-App, keine Windows-Emulation.
 
 > Du brauchst deine **eigene Kopie** von KKND2 Krossfire (Steam). Die App enthält **keine Spieldaten**.
+
+**Videos:** [Showcase](https://youtu.be/qjxeIWKOAXM) · [Installationsanleitung](https://youtu.be/-_eO1crVv4I)
 
 - **Oben:** Spielfeld im Vollbild ohne Seitenleiste. Touch: Tippen = auswählen/befehlen, Ziehen =
   Auswahlrahmen, zwei Finger = scrollen, Zwei-Finger-Tipp = abwählen.
