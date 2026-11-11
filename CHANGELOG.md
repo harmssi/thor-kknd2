@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.2.0 – 2026-11-11 (the deck in the game's look)
+
+**English**
+- The bottom screen is drawn in the look of your faction: the game's own sidebar button plates, menu symbols and bitmap font,
+  read at runtime from your imported files (`levels/surv.bpk`, `mute.bpk`, `robo.bpk`). Nothing of it is shipped with the app.
+- Research page: every building with its tech level and the cost of the next one; a tap sends a free research lab, a second tap stops it.
+- Oil overview in the header: drill rigs, tankers, power stations, oil left under your rigs, and the game clock.
+- Control groups 1–0 are larger and show the group's unit picture and size (hold = store, tap = pick, tap again = look).
+- New commands: Scatter, Stance, All army, Same type, Base, Alert (jump to the last attack), Pause, Speed (1× / 1.5× / 2× / 0.5×),
+  Find (centre on the selection). Attack alerts blink on the minimap. The selection shows unit pictures.
+- Controller: L2/R2 also reach the research page, L1/R1 + A work on its cards.
+
+**Deutsch**
+- Der untere Bildschirm im Aussehen deiner Fraktion: Knopfplatten, Menüsymbole und Schrift des Spiels, zur Laufzeit aus deinen
+  importierten Dateien gelesen (`levels/surv.bpk`, `mute.bpk`, `robo.bpk`). Nichts davon steckt in der App.
+- Forschungsseite: jedes Gebäude mit Technikstufe und Preis der nächsten; Tippen schickt ein freies Forschungslabor, nochmal stoppt.
+- Öl-Übersicht oben: Bohrtürme, Tanker, Kraftwerke, Öl im Boden unter deinen Bohrtürmen, dazu die Spielzeit.
+- Kontrollgruppen 1–0 größer, mit Bild und Größe der Gruppe (halten = speichern, tippen = wählen, nochmal = hinsehen).
+- Neue Befehle: Streuen, Haltung, Armee, Gleiche, Basis, Alarm (zum letzten Angriff), Pause, Tempo (1× / 1,5× / 2× / 0,5×),
+  Finden (zur Auswahl springen). Angriffsalarme blinken auf der Minikarte. Die Auswahl zeigt Einheitenbilder.
+- Controller: L2/R2 erreichen auch die Forschungsseite, L1/R1 + A bedienen ihre Karten.
+
 ## v0.1.1 – 2026-11-08
 
 **English**

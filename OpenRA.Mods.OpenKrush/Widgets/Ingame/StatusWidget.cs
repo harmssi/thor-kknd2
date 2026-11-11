@@ -63,7 +63,7 @@ public class StatusWidget : Widget
 
 	private void DrawTimer()
 	{
-		var text = WidgetUtils.FormatTime(this.ingameUi.World.WorldTick, false, this.ingameUi.World.Timestep);
+		var text = WidgetUtils.FormatTime(this.ingameUi.World.WorldTick, false, Thor.ThorDeckBridge.BaseTimestep); // game time, also when the deck changes the speed
 		this.font?.DrawText(text, new int2(this.RenderBounds.X + 10, this.RenderBounds.Y + 5), Color.White);
 	}
 

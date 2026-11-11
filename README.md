@@ -13,18 +13,25 @@ Videos: [showcase](https://youtu.be/qjxeIWKOAXM) · [install guide](https://yout
 
 - **Top screen:** the battlefield, full screen, no sidebar. Touch: tap = select / command,
   drag = selection box, two-finger drag = scroll, two-finger tap = deselect.
-- **Bottom screen (deck):** the complete build menu – Infantry / Vehicles / Buildings / Defense, one queue per
-  factory, the game's own unit and building pictures, cost in oil, progress and queue count; locked or
-  unaffordable entries are greyed out. Tap = build or queue (buildings: tap, then place on the top screen),
-  long-press = hold, again = cancel. Next to it: minimap (tap/drag = jump), oil, selection, control groups
-  (tap = select, tap again = jump, long-press = assign) and Deploy, Stop, Attack, Move, Waypoint, Sell,
-  Repair, Menu, Save.
+- **Bottom screen (deck):** drawn in the look of your faction – the game's own sidebar button plates, symbols
+  and bitmap font are read from your imported files (Survivors metal, Evolved stone, Series 9 steel).
+  - **Build menus** Infantry / Vehicles / Buildings / Defense behind the game's own menu buttons, one queue
+    per factory, the game's unit and building pictures, cost in oil, progress and queue count. Tap = build or
+    queue (buildings: tap, then place on the top screen), long-press = hold, again = cancel.
+  - **Research:** every building with its tech level; a tap sends a free research lab to raise it, a second
+    tap stops it.
+  - **Oil:** stock, drill rigs, tankers, power stations and the oil left under your rigs; game clock.
+  - **Minimap** (tap/drag = jump) with blinking attack alerts, selection with pictures and health.
+  - **Control groups 1–0:** hold = store the selection, tap = pick it, tap again = look at it; each tile
+    shows the group's unit picture and size.
+  - **Commands:** Deploy, Stop, Attack-move, Move, Waypoint, Scatter, Stance, Sell, Repair, All army,
+    Same type, Base, Alert (last attack), Pause, Speed (1× / 1.5× / 2× / 0.5×), Find (the selection), Save, Menu.
 - **Controller:** left stick = cursor, right stick = scroll, A = left click, B = right click / deselect,
-  X = stop, Y = attack-move, L3 = deploy, L1/R1 = focus ring over the build cards (A builds),
+  X = stop, Y = attack-move, L3 = deploy, L1/R1 = focus ring over the build and research cards (A activates),
   L2/R2 = deck tab, D-pad = groups 1–4, Select = menu, Start = Enter.
 - **Content:** Survivors, Evolved and Series 9 in skirmish against the AI on the 15 original multiplayer
   maps (converted on the device; the ground is drawn straight from the original level files).
-  Original announcer, unit voices, sound effects and music; the intro videos play. Save and load work.
+  Original announcer, unit voices, sound effects and music; the intro videos play. Saving works (loading: see limits).
   60 fps on the Thor.
 
 | Attack | Victory | Evolved | Series 9 |
@@ -52,12 +59,14 @@ Screenshots: AYN Thor, rendered from the author's own Steam copy.
 
 Saves: `Android/data/de.harmssi.thorkknd2/files/support/Saves`.
 
-## Known limits (v0.1.1)
+## Known limits (v0.2.0)
 
 - **No campaigns** yet (17 missions per faction need their own mission scripts). Skirmish only.
 - No aircraft; balance follows OpenKrush's unfinished 2020 KKND2 rules, not tuned against the original.
 - Only the English sound set and the English video sound tracks are used.
 - Multiplayer over the network is untested.
+- Loading a saved game can come back "out of sync" and paused once units were trained or research was done
+  before saving. The deck has Save but no Load button for that reason.
 - Tested on the AYN Thor (Android 13) with the Steam version.
 
 ## Build
@@ -95,12 +104,15 @@ OpenRA und OpenKrush. Native arm64-Android-App, keine Windows-Emulation.
 
 - **Oben:** Spielfeld im Vollbild ohne Seitenleiste. Touch: Tippen = auswählen/befehlen, Ziehen =
   Auswahlrahmen, zwei Finger = scrollen, Zwei-Finger-Tipp = abwählen.
-- **Unten (Deck):** das komplette Baumenü (Infanterie / Fahrzeuge / Gebäude / Abwehr, je Fabrik eine
-  Warteschlange, Original-Bilder aus deinen Spieldateien, Kosten in Öl, Fortschritt, gesperrt/zu teuer
-  ausgegraut; Tippen = bauen, lange drücken = anhalten, nochmal = abbrechen), Minikarte, Öl, Auswahl,
-  Kontrollgruppen und Aufbauen, Stopp, Angriff, Bewegen, Wegpunkt, Verkaufen, Reparieren, Menü, Speichern.
+- **Unten (Deck):** im Aussehen deiner Fraktion – Knopfplatten, Symbole und Schrift des Spiels kommen zur
+  Laufzeit aus deinen importierten Dateien. Baumenüs (Infanterie / Fahrzeuge / Gebäude / Abwehr, je Fabrik
+  eine Warteschlange; Tippen = bauen, lange drücken = anhalten, nochmal = abbrechen), **Forschung** (Gebäude
+  mit Technikstufe, Tippen = erforschen), Öl-Übersicht (Bohrtürme, Tanker, Kraftwerke, Öl im Boden), Minikarte
+  mit Angriffsalarm, Auswahl, **Kontrollgruppen 1–0** (halten = speichern, tippen = wählen, nochmal = hinsehen)
+  und Aufbauen, Stopp, Angriff, Bewegen, Wegpunkt, Streuen, Haltung, Verkaufen, Reparieren, Armee, Gleiche,
+  Basis, Alarm, Pause, Tempo, Finden, Speichern, Menü.
 - **Controller:** linker Stick = Cursor, rechter Stick = Scrollen, A = Linksklick, B = Rechtsklick,
-  X = Stopp, Y = Angriffsbewegung, L3 = Aufbauen, L1/R1 = Fokus über die Baukarten (A baut),
+  X = Stopp, Y = Angriffsbewegung, L3 = Aufbauen, L1/R1 = Fokus über die Bau- und Forschungskarten (A löst aus),
   L2/R2 = Deck-Reiter, Steuerkreuz = Gruppen 1–4, Select = Menü, Start = Enter.
 - **Inhalt:** Survivors, Evolved und Series 9 im Gefecht gegen die KI auf den 15 Original-Mehrspielerkarten,
   Original-Ansagen, Stimmen, Effekte und Musik, Intro-Videos, Speichern/Laden, 60 fps.
@@ -111,7 +123,7 @@ normalen Ordner. APK aus dem [Release](../../releases/latest) installieren, **St
 `KKND 2 Krossfire` auswählen. Dann Einzelspieler → Gefecht, Computer-Gegner hinzufügen, starten und unten
 **Aufbauen** tippen.
 
-**Grenzen von v0.1.1:** keine Kampagnen, keine Flugzeuge, Werte nicht ans Original angeglichen, nur
+**Grenzen von v0.2.0:** keine Kampagnen, keine Flugzeuge, Werte nicht ans Original angeglichen, nur
 englischer Tonsatz, Netzwerkspiel ungetestet.
 
 Dank an OpenRA, IceReaper/OpenKrush und Dzierzan. Lizenz: GNU GPL v3. Inoffiziell, nicht mit den

@@ -19,7 +19,10 @@ using Graphics;
 using JetBrains.Annotations;
 using Mechanics.Construction.Orders;
 using Mechanics.Construction.Traits;
+using Mechanics.Oil.Traits;
+using Mechanics.Researching;
 using Mechanics.Researching.Orders;
+using Mechanics.Researching.Traits;
 using Mechanics.Technicians.Orders;
 using OpenRA.Traits;
 using OpenRA.Widgets;
@@ -33,7 +36,10 @@ public sealed class DeckSnapshot
 
 	public sealed record Queue(uint ActorId, string Category, string Producer, Item[] Items);
 
-	public sealed record Selected(string Title, int Count, int HealthPercent);
+	public sealed record Selected(string Name, string Title, int Count, int HealthPercent);
+
+	/// <summary>A building whose tech level a research lab can raise.</summary>
+	public sealed record Tech(uint ActorId, string Name, string Title, int Level, int MaxLevel, bool Busy, int Cost);
 
 	public sealed record Dot(float X, float Y, int Argb, bool Building);
 
@@ -48,6 +54,13 @@ public sealed class DeckSnapshot
 	public Queue[] Queues = Array.Empty<Queue>();
 	public Selected[] Selection = Array.Empty<Selected>();
 	public int[] Groups = new int[10];
+	public string?[] GroupIcons = new string?[10]; // most common unit type of each group
+	public Tech[] Techs = Array.Empty<Tech>();
+	public int Labs, FreeLabs;
+	public int Rigs, Tankers, Stations, OilLeft;
+	public int Seconds; // game time
+	public string Stance = ""; // of the first selected unit that has stances
+	public Dot[] Pings = Array.Empty<Dot>(); // attack alerts
 	public string Mode = "";
 	public bool Waypoint;
 	public string? Level;
@@ -81,6 +94,15 @@ public class ThorDeckBridge : ITick, IWorldLoaded, INotifyActorDisposing
 
 	/// <summary>Set by the host: hides OpenRA's own sidebar because the deck replaces it.</summary>
 	public static bool HideSidebar;
+
+	/// <summary>Live state for the deck (the snapshot stops updating while the game is paused).</summary>
+	public static bool IsPaused => Renderer?.World.Paused ?? false;
+
+	/// <summary>Milliseconds per game tick as the game started with (the lobby's game speed).</summary>
+	public static int BaseTimestep = 40;
+
+	/// <summary>Deck game speed in percent of the lobby's speed (100, 150, 200 or 50).</summary>
+	public static int SpeedPercent => BaseTimestep * 100 / Math.Max(1, Renderer?.World.Timestep ?? BaseTimestep);
 
 	/// <summary>Queued orders from the waypoint toggle get Shift.</summary>
 	public static bool WaypointMode;
@@ -218,7 +240,10 @@ public class ThorDeckBridge : ITick, IWorldLoaded, INotifyActorDisposing
 	{
 		this.wr = worldRenderer;
 		if (w.Type == WorldType.Regular)
+		{
 			Renderer = worldRenderer;
+			BaseTimestep = w.Timestep;
+		}
 	}
 
 	void INotifyActorDisposing.Disposing(Actor self)
@@ -290,8 +315,53 @@ public class ThorDeckBridge : ITick, IWorldLoaded, INotifyActorDisposing
 				.ToArray();
 
 			for (var g = 0; g < 10; g++)
-				s.Groups[g] = world.ControlGroups.GetActorsInControlGroup(g).Count();
+			{
+				var members = world.ControlGroups.GetActorsInControlGroup(g).ToList();
+				s.Groups[g] = members.Count;
+				s.GroupIcons[g] = members.GroupBy(a => a.Info.Name).OrderByDescending(x => x.Count()).FirstOrDefault()?.Key;
+			}
+
+			// research: every own building with tech levels left, and the labs that can raise them
+			var labs = world.ActorsWithTrait<Researches>().Where(t => t.Actor.Owner == player && t.Actor.IsInWorld && !t.Trait.IsTraitDisabled).ToList();
+			s.Labs = labs.Count;
+			s.FreeLabs = labs.Count(t => t.Trait.GetState() == ResarchState.Available);
+			var lab = labs.FirstOrDefault();
+			var rate = 100;
+			if (lab.Actor != null)
+			{
+				var rates = lab.Trait.Info.ResearchRates;
+				rate = rates[Math.Clamp(lab.Actor.Trait<Researchable>().Level, 0, rates.Length - 1)];
+			}
+
+			s.Techs = world.ActorsWithTrait<Researchable>()
+				.Where(t => t.Actor.Owner == player && t.Actor.IsInWorld && !t.Actor.IsDead && !t.Trait.IsTraitDisabled && t.Trait.MaxLevel > 0)
+				.Select(t => new DeckSnapshot.Tech(
+					t.Actor.ActorID,
+					t.Actor.Info.Name,
+					t.Actor.Info.TraitInfoOrDefault<TooltipInfo>()?.Name ?? t.Actor.Info.Name,
+					t.Trait.Level,
+					t.Trait.MaxLevel,
+					t.Trait.ResearchedBy != null,
+					t.Trait.Info.ResearchCostBase + t.Trait.Info.ResearchCostTechLevel * t.Trait.NextTechLevel() * rate / 100))
+				.OrderBy(t => t.Title).ThenBy(t => t.ActorId)
+				.ToArray();
+
+			// oil economy
+			var rigs = world.ActorsWithTrait<Drillrig>().Where(t => t.Actor.Owner == player && t.Actor.IsInWorld).ToList();
+			s.Rigs = rigs.Count;
+			s.OilLeft = rigs.Sum(t => t.Trait.Current);
+			s.Tankers = world.ActorsWithTrait<Tanker>().Count(t => t.Actor.Owner == player && t.Actor.IsInWorld);
+			s.Stations = world.ActorsWithTrait<PowerStation>().Count(t => t.Actor.Owner == player && t.Actor.IsInWorld);
 		}
+
+		s.Seconds = world.WorldTick * BaseTimestep / 1000;
+		s.Stance = world.Selection.Actors.Where(a => !a.IsDead).Select(a => a.TraitOrDefault<AutoTarget>())
+			.FirstOrDefault(a => a is { Info.EnableStances: true })?.PredictedStance.ToString() ?? "";
+		s.Pings = (world.WorldActor.TraitOrDefault<RadarPings>()?.Pings ?? new()).Where(p => p.IsVisible()).Select(p =>
+		{
+			var c = map.CellContaining(p.Position);
+			return new DeckSnapshot.Dot(c.X + 0.5f, c.Y + 0.5f, p.Color.ToArgb(), false);
+		}).ToArray();
 
 		s.Selection = world.Selection.Actors
 			.Where(a => !a.IsDead && a.IsInWorld)
@@ -301,7 +371,7 @@ public class ThorDeckBridge : ITick, IWorldLoaded, INotifyActorDisposing
 				var first = g.First();
 				var hp = g.Select(a => a.TraitOrDefault<IHealth>()).Where(h => h != null).ToList();
 				var pct = hp.Count == 0 ? 100 : (int)hp.Average(h => h!.MaxHP == 0 ? 100 : h.HP * 100L / h.MaxHP);
-				return new DeckSnapshot.Selected(first.Info.TraitInfoOrDefault<TooltipInfo>()?.Name ?? first.Info.Name, g.Count(), pct);
+				return new DeckSnapshot.Selected(first.Info.Name, first.Info.TraitInfoOrDefault<TooltipInfo>()?.Name ?? first.Info.Name, g.Count(), pct);
 			})
 			.OrderByDescending(x => x.Count)
 			.ToArray();
@@ -449,6 +519,123 @@ public class ThorDeckBridge : ITick, IWorldLoaded, INotifyActorDisposing
 				if (before.SetEquals(world.Selection.Actors) && before.Count > 0)
 					wr.Viewport.Center(world.Selection.Actors); // second tap jumps to the group
 			}
+		});
+	}
+
+	private static IEnumerable<Actor> OwnSelection(World world) => world.Selection.Actors.Where(a => a.Owner == world.LocalPlayer && !a.IsDead);
+
+	public static void Scatter()
+	{
+		Post((world, _) =>
+		{
+			foreach (var a in OwnSelection(world).Where(a => a.Info.HasTraitInfo<MobileInfo>()))
+				world.IssueOrder(new Order("Scatter", a, false));
+		});
+	}
+
+	/// <summary>Switches the selected units to the next stance (hold fire, return fire, defend, attack anything).</summary>
+	public static void NextStance()
+	{
+		Post((world, _) =>
+		{
+			var units = OwnSelection(world).Where(a => a.TraitOrDefault<AutoTarget>() is { Info.EnableStances: true }).ToList();
+			if (units.Count == 0)
+				return;
+
+			var next = (UnitStance)(((int)units[0].Trait<AutoTarget>().PredictedStance + 1) % 4);
+			foreach (var a in units)
+			{
+				a.Trait<AutoTarget>().PredictedStance = next;
+				world.IssueOrder(new Order("SetUnitStance", a, false) { ExtraData = (uint)next });
+			}
+		});
+	}
+
+	/// <summary>Selects every own mobile unit that can fight; sameType = all units of the selected types instead.</summary>
+	public static void SelectArmy(bool sameType)
+	{
+		Post((world, wr) =>
+		{
+			var types = world.Selection.Actors.Select(a => a.Info.Name).ToHashSet();
+			var army = world.Actors.Where(a => a.Owner == world.LocalPlayer && a.IsInWorld && !a.IsDead && a.Info.HasTraitInfo<ISelectableInfo>()
+				&& (sameType ? types.Contains(a.Info.Name) : a.Info.HasTraitInfo<MobileInfo>() && a.Info.HasTraitInfo<AttackBaseInfo>())).ToList();
+			if (army.Count > 0)
+				world.Selection.Combine(world, army, false, false);
+		});
+	}
+
+	/// <summary>Looks at the next own base building (outpost) and selects it, like the engine's cycle-bases hotkey.</summary>
+	public static void NextBase()
+	{
+		Post((world, wr) =>
+		{
+			var bases = world.ActorsHavingTrait<BaseBuilding>().Where(a => a.Owner == world.LocalPlayer && a.IsInWorld).ToList();
+			if (bases.Count == 0)
+				bases = world.ActorsHavingTrait<Building>().Where(a => a.Owner == world.LocalPlayer && a.IsInWorld && a.Info.HasTraitInfo<ISelectableInfo>()).Take(1).ToList();
+			if (bases.Count == 0)
+				return;
+
+			var next = bases.SkipWhile(b => !world.Selection.Contains(b)).Skip(1).FirstOrDefault() ?? bases[0];
+			world.Selection.Combine(world, new[] { next }, false, true);
+			wr.Viewport.Center(world.Selection.Actors);
+		});
+	}
+
+	public static void LastEvent()
+	{
+		Post((world, wr) =>
+		{
+			if (world.WorldActor.TraitOrDefault<RadarPings>()?.LastPingPosition is { } pos)
+				wr.Viewport.Center(pos);
+		});
+	}
+
+	public static void TogglePause()
+	{
+		Post((world, _) => world.SetPauseState(!world.Paused));
+	}
+
+	/// <summary>Game speed for a local game: 1x, 1.5x, 2x, 0.5x.</summary>
+	public static void NextSpeed()
+	{
+		Post((world, _) =>
+		{
+			if (world.IsReplay || world.LobbyInfo.NonBotClients.Count() > 1)
+				return;
+
+			var steps = new[] { BaseTimestep, BaseTimestep * 2 / 3, BaseTimestep / 2, BaseTimestep * 2 };
+			var next = steps[(Array.IndexOf(steps, world.Timestep) + 1) % steps.Length];
+
+			// shortcut: the engine fixes the timestep at game start and has no setter, so it is written by reflection;
+			// make World.Timestep settable in thor/engine.patch if the engine is updated.
+			typeof(World).GetField(nameof(World.Timestep))!.SetValue(world, next);
+		});
+	}
+
+	/// <summary>Starts or stops raising the tech level of a building with a research lab.</summary>
+	public static void Research(uint actorId)
+	{
+		Post((world, _) =>
+		{
+			var target = world.GetActorById(actorId);
+			if (target == null)
+				return;
+
+			var labs = world.ActorsHavingTrait<Researches>().Where(a => a.Owner == world.LocalPlayer && a.IsInWorld).ToList();
+			var lab = labs.FirstOrDefault(a => ResearchUtils.GetAction(a, target) == ResearchAction.Stop)
+				?? labs.FirstOrDefault(a => ResearchUtils.GetAction(a, target) == ResearchAction.Start);
+			if (lab != null)
+				world.IssueOrder(new Order(ResearchOrderTargeter.Id, lab, Target.FromActor(target), true));
+		});
+	}
+
+	/// <summary>Centres the top screen on the current selection.</summary>
+	public static void FindSelection()
+	{
+		Post((world, wr) =>
+		{
+			if (world.Selection.Actors.Any(a => a.IsInWorld))
+				wr.Viewport.Center(world.Selection.Actors.Where(a => a.IsInWorld));
 		});
 	}
 

@@ -142,8 +142,8 @@ public static class ThorInput
 		var joy = SDL.SDL_GameControllerGetJoystick(pad);
 		var lt = SDL.SDL_GameControllerGetAxis(pad, SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT) > 16000 || SDL.SDL_JoystickGetButton(joy, 15) != 0;
 		var rt = SDL.SDL_GameControllerGetAxis(pad, SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT) > 16000 || SDL.SDL_JoystickGetButton(joy, 16) != 0;
-		if (lt && !l2) { DeckView.Tab = (DeckView.Tab + 3) % 4; DeckView.Producer = 0; DeckView.ScrollRow = 0; }
-		if (rt && !r2) { DeckView.Tab = (DeckView.Tab + 1) % 4; DeckView.Producer = 0; DeckView.ScrollRow = 0; }
+		if (lt && !l2) { DeckView.Tab = (DeckView.Tab + DeckView.TabCount - 1) % DeckView.TabCount; DeckView.Producer = 0; DeckView.ScrollRow = 0; }
+		if (rt && !r2) { DeckView.Tab = (DeckView.Tab + 1) % DeckView.TabCount; DeckView.Producer = 0; DeckView.ScrollRow = 0; }
 		l2 = lt;
 		r2 = rt;
 	}
