@@ -27,3 +27,5 @@ Install over 0.1.x; the imported game data and maps stay. Saved games are kept p
 - If the game files are missing, the deck falls back to plain plates and a system font.
 
 `KKND2-Thor-v0.2.0.apk` · SHA-256 in `SHA256SUMS`
+
+▶ Update video: https://youtu.be/bI8RbqBXaN0
